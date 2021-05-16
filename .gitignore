@@ -1,2 +1,4 @@
 /sg_env
 /TODO
+/sg_project/**/migrations
+/sg_project/**/__pycache__

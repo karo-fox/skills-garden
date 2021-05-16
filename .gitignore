@@ -1,4 +1,4 @@
 /sg_env
 /TODO
-/sg_project/garden/__pycache__
-/sg_project/garden/migrations
+/sg_project/**/__pycache__/
+/sg_project/**/migrations

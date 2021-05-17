@@ -1,4 +1,5 @@
 /sg_env
+/db.sqlite3
 /TODO
 /sg_project/**/__pycache__/
 /sg_project/**/migrations

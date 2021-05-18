@@ -23,7 +23,7 @@ class Topic(models.Model):
     last_reviewed = models.DateField()
 
     def __str__(self):
-        return f'Topic: {self.name} - {self.field} - {self.last_reviewed}'
+        return f'Topic: {self.name} - {self.field.name} - {self.last_reviewed}'
     
     def __repr__(self):
         return f'models.Topic({self.name}, {self.description}, {self.field}, {self.date_added}, {self.last_reviewed})'

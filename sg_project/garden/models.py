@@ -9,7 +9,10 @@ class Field(models.Model):
     review_frequency = models.DurationField()
 
     def __str__(self):
-        return self.name
+        return f'Field: {self.name} - {self.review_frequency} - {self.last_reviewed}'
+    
+    def __repr__(self):
+        return f'models.Field({self.name}, {self.description}, {self.date_added}, {self.last_reviewed}, {self.review_frequency})'
 
 
 class Topic(models.Model):
@@ -20,4 +23,7 @@ class Topic(models.Model):
     last_reviewed = models.DateField()
 
     def __str__(self):
-        return f'"{self.name}" in field "{self.field}"'
+        return f'Topic: {self.name} - {self.field} - {self.last_reviewed}'
+    
+    def __repr__(self):
+        return f'models.Topic({self.name}, {self.description}, {self.field}, {self.date_added}, {self.last_reviewed})'

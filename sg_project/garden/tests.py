@@ -1,7 +1,12 @@
 import datetime
 
-from django.test import TestCase
+from django.test import TestCase, Client
+from django.urls import reverse, resolve
+
 from .models import Field, Topic
+from .views import HomeView
+
+
 
 class TestModels(TestCase):
 
@@ -30,3 +35,24 @@ class TestModels(TestCase):
 
     def test_topic_str(self):
         self.assertEqual(self.topic1.__str__(), 'Topic: Test topic - Test field - 2021-05-18')
+
+
+
+class TestUrls(TestCase):
+
+    def test_home_url_resolves(self):
+        url = reverse('home')
+        self.assertEqual(resolve(url).func.view_class, HomeView)
+
+
+
+class TestView(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+    
+    def test_home_view(self):
+        response = self.client.get(reverse('home'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'index.html')

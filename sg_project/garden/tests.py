@@ -1,7 +1,7 @@
 import datetime
 
 from django.test import TestCase, Client
-from django.urls import reverse, resolve
+from django.urls import reverse, resolve, reverse_lazy
 
 from .models import Field, Topic
 from .views import HomeView
@@ -40,8 +40,11 @@ class TestModels(TestCase):
 
 class TestUrls(TestCase):
 
+    def setUp(self):
+        self.urlconf = 'garden.urls'
+
     def test_home_url_resolves(self):
-        url = reverse('home')
+        url = reverse('home', urlconf=self.urlconf)
         self.assertEqual(resolve(url).func.view_class, HomeView)
 
 
@@ -50,9 +53,10 @@ class TestView(TestCase):
 
     def setUp(self):
         self.client = Client()
+        self.urlconf = 'garden.urls'
     
     def test_home_view(self):
-        response = self.client.get(reverse('home'))
+        response = self.client.get(reverse('home', urlconf=self.urlconf))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')

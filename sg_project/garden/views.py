@@ -6,3 +6,7 @@ from .models import Field, Topic
 class HomeView(ListView):
     template_name = 'index.html'
     queryset = Field.objects.all()
+
+
+class FieldView(ListView):
+    template_name = 'field.html'

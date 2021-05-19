@@ -6,4 +6,3 @@ from .models import Field, Topic
 class HomeView(ListView):
     template_name = 'index.html'
     queryset = Field.objects.all()
-    context_object_name = 'field_list'

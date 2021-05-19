@@ -1,6 +1,6 @@
 import datetime
 
-from django.test import TestCase, Client
+from django.test import TestCase, SimpleTestCase, Client
 from django.urls import reverse, resolve, reverse_lazy
 
 from .models import Field, Topic
@@ -38,7 +38,7 @@ class TestModels(TestCase):
 
 
 
-class TestUrls(TestCase):
+class TestUrls(SimpleTestCase):
 
     def setUp(self):
         self.urlconf = 'garden.urls'
@@ -57,6 +57,7 @@ class TestView(TestCase):
     
     def test_home_view(self):
         response = self.client.get(reverse('home', urlconf=self.urlconf))
-
+        
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')
+        self.assertQuerysetEqual(response.context['object_list'], Field.objects.all())

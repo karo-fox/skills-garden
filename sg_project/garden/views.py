@@ -17,3 +17,7 @@ class FieldView(DetailView):
         context = super().get_context_data(**kwargs)
         context['topic_list'] = Topic.objects.filter(field_id=context['object'].id)
         return context
+    
+class TopicView(DetailView):
+    template_name = 'topic.html'
+    model = Topic

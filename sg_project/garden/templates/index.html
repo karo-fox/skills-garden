@@ -2,6 +2,6 @@
 {% block content %}
   <p>Hello world</p>
   {% for field in field_list %}
-    <p>{{ field.name }} - {{ field.last_reviewed }}</p>
+    <p><a href="{{ field.get_absolute_url }}">{{ field.name }} - {{ field.last_reviewed }}</a></p>
   {% endfor %}
 {% endblock %}

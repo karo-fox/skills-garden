@@ -3,6 +3,6 @@
   <p>Field view</p>
   <p>{{ object.name}}</p>
   {% for topic in topic_list %}
-    <p>{{ topic.name }}</p>
+    <p><a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a></p>
   {% endfor %}
 {% endblock %}

@@ -82,8 +82,15 @@ class TestViews(TestCase):
 
 
     def test_field_view(self):
-        response = self.client.get(reverse('field', args=[1], urlconf=self.urlconf))
+        response = self.client.get(reverse('field', kwargs={'pk': 1}, urlconf=self.urlconf))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'field.html')
         self.assertQuerysetEqual(response.context['topic_list'], Topic.objects.filter(field=self.field1))
+    
+
+    def test_topic_view(self):
+        response = self.client.get(reverse('topic', kwargs={'pk': 1, 'field_pk': 1}, urlconf=self.urlconf))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'topic.html')

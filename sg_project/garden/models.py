@@ -10,6 +10,9 @@ class Field(models.Model):
     last_reviewed = models.DateField()
     review_frequency = models.DurationField()
 
+    def get_absolute_url(self):
+        return reverse('garden:field', kwargs={'pk': self.id})
+
     def __str__(self):
         return self.name
     
@@ -26,6 +29,9 @@ class Topic(models.Model):
     field = models.ForeignKey(Field, on_delete=models.CASCADE)
     date_added = models.DateField(auto_now_add=True)
     last_reviewed = models.DateField()
+
+    def get_absolute_url(self):
+        return reverse('garden:topic', kwargs={'field_pk': self.field.id, 'pk': self.id})
 
     def __str__(self):
         return self.name

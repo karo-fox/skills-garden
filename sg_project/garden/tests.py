@@ -1,7 +1,7 @@
 import datetime
 
 from django.test import TestCase, SimpleTestCase, Client
-from django.urls import reverse, resolve, reverse_lazy
+from django.urls import reverse, resolve
 
 from .models import Field, Topic
 from .views import HomeView

@@ -1,7 +1,35 @@
-{% extends 'base.html' %}
-{% block content %}
-  <p>Hello world</p>
-  {% for field in field_list %}
-    <p><a href="{{ field.get_absolute_url }}">{{ field.name }} - {{ field.last_reviewed }}</a></p>
-  {% endfor %}
-{% endblock %}
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <p>
+    Outside React
+  </p> -->
+  <div id="root">
+    <!-- Here comes React -->
+  </div>
+  <!-- <p>
+    Outside React
+  </p> -->
+
+
+  <!-- React -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <!-- JSX (Bebel) -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel" src="{% static 'app/JSONResponse.js' %}"></script>
+  
+  <script type="text/babel" src="{% static 'app/MainNavbar.js' %}"></script>
+  <script type="text/babel" src="{% static 'app/SidebarNavbar.js' %}"></script>
+  <script type="text/babel" src="{% static 'app/Navbar.js' %}"></script>
+
+  <script type="text/babel" src="{% static 'app/index.js' %}"></script>
+</body>
+</html>

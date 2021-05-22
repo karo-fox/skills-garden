@@ -18,12 +18,12 @@ var MainNavbar = function (_React$Component) {
   }
 
   _createClass(MainNavbar, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       return React.createElement(
-        'p',
-        null,
-        'MainNavbar here'
+        "div",
+        { className: "navbar-main" },
+        "Main Navbar here"
       );
     }
   }]);

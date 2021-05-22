@@ -8,25 +8,25 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SidebarNavbar = function (_React$Component) {
-  _inherits(SidebarNavbar, _React$Component);
+var MainContent = function (_React$Component) {
+  _inherits(MainContent, _React$Component);
 
-  function SidebarNavbar(props) {
-    _classCallCheck(this, SidebarNavbar);
+  function MainContent(props) {
+    _classCallCheck(this, MainContent);
 
-    return _possibleConstructorReturn(this, (SidebarNavbar.__proto__ || Object.getPrototypeOf(SidebarNavbar)).call(this, props));
+    return _possibleConstructorReturn(this, (MainContent.__proto__ || Object.getPrototypeOf(MainContent)).call(this, props));
   }
 
-  _createClass(SidebarNavbar, [{
-    key: 'render',
+  _createClass(MainContent, [{
+    key: "render",
     value: function render() {
       return React.createElement(
-        'p',
-        null,
-        'SidebarNavbar here'
+        "div",
+        { className: "content-main" },
+        "Main Content here"
       );
     }
   }]);
 
-  return SidebarNavbar;
+  return MainContent;
 }(React.Component);

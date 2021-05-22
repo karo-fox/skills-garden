@@ -7,11 +7,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>index.js start</p>
-        <Navbar />
-        <JSONResponse />
-        <p>index.js end</p>
+      <div id="content">
+        <header>
+          <MainNavbar />
+          <SideNavbar />
+        </header>
+        <section className="main">
+          <MainContent />
+          <SideContent />
+        </section>
+        <Footer />
       </div>
 
     )

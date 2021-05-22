@@ -8,26 +8,25 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Navbar = function (_React$Component) {
-  _inherits(Navbar, _React$Component);
+var Footer = function (_React$Component) {
+  _inherits(Footer, _React$Component);
 
-  function Navbar(props) {
-    _classCallCheck(this, Navbar);
+  function Footer(props) {
+    _classCallCheck(this, Footer);
 
-    return _possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).call(this, props));
+    return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
   }
 
-  _createClass(Navbar, [{
-    key: 'render',
+  _createClass(Footer, [{
+    key: "render",
     value: function render() {
       return React.createElement(
-        'nav',
-        null,
-        React.createElement(MainNavbar, null),
-        React.createElement(SidebarNavbar, null)
+        "footer",
+        { className: "footer" },
+        "Copyright \xA9 2021 by Karo"
       );
     }
   }]);
 
-  return Navbar;
+  return Footer;
 }(React.Component);

@@ -8,40 +8,25 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var App = function (_React$Component) {
-  _inherits(App, _React$Component);
+var SideNavbar = function (_React$Component) {
+  _inherits(SideNavbar, _React$Component);
 
-  function App(props) {
-    _classCallCheck(this, App);
+  function SideNavbar(props) {
+    _classCallCheck(this, SideNavbar);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+    return _possibleConstructorReturn(this, (SideNavbar.__proto__ || Object.getPrototypeOf(SideNavbar)).call(this, props));
   }
 
-  _createClass(App, [{
+  _createClass(SideNavbar, [{
     key: "render",
     value: function render() {
       return React.createElement(
         "div",
-        { id: "content" },
-        React.createElement(
-          "header",
-          null,
-          React.createElement(MainNavbar, null),
-          React.createElement(SideNavbar, null)
-        ),
-        React.createElement(
-          "section",
-          { className: "main" },
-          React.createElement(MainContent, null),
-          React.createElement(SideContent, null)
-        ),
-        React.createElement(Footer, null)
+        { className: "navbar-side" },
+        "Side Navbar here"
       );
     }
   }]);
 
-  return App;
+  return SideNavbar;
 }(React.Component);
-
-var domContainer = document.querySelector('#root');
-ReactDOM.render(React.createElement(App, null), domContainer);

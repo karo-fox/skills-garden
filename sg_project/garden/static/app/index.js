@@ -14,26 +14,44 @@ var App = function (_React$Component) {
   function App(props) {
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+    _this.state = {
+      side: '',
+      main: 'fields'
+    };
+    _this.handleClick = _this.handleClick.bind(_this);
+    return _this;
   }
 
   _createClass(App, [{
-    key: "render",
+    key: 'handleClick',
+    value: function handleClick() {
+      this.setState({
+        side: 'fields'
+      });
+    }
+  }, {
+    key: 'render',
     value: function render() {
+      var _state = this.state,
+          main = _state.main,
+          side = _state.side;
+
       return React.createElement(
-        "div",
-        { id: "content" },
+        'div',
+        { id: 'content' },
         React.createElement(
-          "header",
+          'header',
           null,
           React.createElement(MainNavbar, null),
-          React.createElement(SideNavbar, null)
+          React.createElement(SideNavbar, { handler: this.handleClick })
         ),
         React.createElement(
-          "section",
-          { className: "main" },
-          React.createElement(MainContent, null),
-          React.createElement(SideContent, null)
+          'section',
+          { className: 'main' },
+          React.createElement(MainContent, { show: main }),
+          React.createElement(SideContent, { show: side })
         ),
         React.createElement(Footer, null)
       );

@@ -5,7 +5,8 @@ class Fields extends React.Component {
     super(props);
     this.state = {
       error: null,
-      fields: []
+      fields: [],
+      section: props.section
     }
   }
 
@@ -27,20 +28,35 @@ class Fields extends React.Component {
     }
   
     render() {
-      const { error, fields } = this.state;
+      const { error, fields, section } = this.state;
       if (error) {
         return (
           <div>Error: {error.message}</div>
         );
       } else {
         return (
-          <ul>
-            {fields.map(field => (
-              <li key={field.pk}>
-                {field.name} - {field.description}
-              </li>
-            ))}
-          </ul>
+          <div>
+            {section === "main-content"
+            ? <div className="field-list-main">
+                <ul>
+                  {fields.map(field => (
+                    <li key={field.pk}>
+                      <FieldMain data={field} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            : <div className="field-list-side">
+                <ul>
+                  {fields.map(field => (
+                    <li key={field.pk}>
+                      <FieldSide data={field}/>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              }
+          </div>
         );
       }
       

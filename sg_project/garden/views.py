@@ -18,7 +18,10 @@ def field_list_view(request, *args, **kwargs):
         data = {
             'pk': field.id,
             'name': field.name,
-            'description': field.description
+            'description': field.description,
+            'date_added': field.date_added,
+            'last_reviewed': field.last_reviewed,
+            'review_frequency': field.review_frequency
         }
         response['fields'].append(data)
     return JsonResponse(response)

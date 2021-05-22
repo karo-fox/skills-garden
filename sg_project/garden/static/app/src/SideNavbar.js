@@ -9,6 +9,7 @@ class SideNavbar extends React.Component {
       return (
         <div className="navbar-side">
           Side Navbar here
+          <button onClick={this.props.handler} className="navbar-button">Fields</button>
         </div>
       );
     }

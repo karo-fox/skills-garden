@@ -18,7 +18,8 @@ var Fields = function (_React$Component) {
 
     _this.state = {
       error: null,
-      fields: []
+      fields: [],
+      section: props.section
     };
     return _this;
   }
@@ -45,7 +46,8 @@ var Fields = function (_React$Component) {
     value: function render() {
       var _state = this.state,
           error = _state.error,
-          fields = _state.fields;
+          fields = _state.fields,
+          section = _state.section;
 
       if (error) {
         return React.createElement(
@@ -56,17 +58,37 @@ var Fields = function (_React$Component) {
         );
       } else {
         return React.createElement(
-          'ul',
+          'div',
           null,
-          fields.map(function (field) {
-            return React.createElement(
-              'li',
-              { key: field.pk },
-              field.name,
-              ' - ',
-              field.description
-            );
-          })
+          section === "main-content" ? React.createElement(
+            'div',
+            { className: 'field-list-main' },
+            React.createElement(
+              'ul',
+              null,
+              fields.map(function (field) {
+                return React.createElement(
+                  'li',
+                  { key: field.pk },
+                  React.createElement(FieldMain, { data: field })
+                );
+              })
+            )
+          ) : React.createElement(
+            'div',
+            { className: 'field-list-side' },
+            React.createElement(
+              'ul',
+              null,
+              fields.map(function (field) {
+                return React.createElement(
+                  'li',
+                  { key: field.pk },
+                  React.createElement(FieldSide, { data: field })
+                );
+              })
+            )
+          )
         );
       }
     }

@@ -8,43 +8,33 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SideContent = function (_React$Component) {
-  _inherits(SideContent, _React$Component);
+var FieldMain = function (_React$Component) {
+  _inherits(FieldMain, _React$Component);
 
-  function SideContent(props) {
-    _classCallCheck(this, SideContent);
+  function FieldMain(props) {
+    _classCallCheck(this, FieldMain);
 
-    return _possibleConstructorReturn(this, (SideContent.__proto__ || Object.getPrototypeOf(SideContent)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (FieldMain.__proto__ || Object.getPrototypeOf(FieldMain)).call(this, props));
+
+    _this.state = {
+      data: props.data
+    };
+    return _this;
   }
 
-  _createClass(SideContent, [{
-    key: 'renderComponent',
-    value: function renderComponent() {
-      switch (this.props.show) {
-        case 'fields':
-          return React.createElement(Fields, { section: 'main-content' });
-        default:
-          return React.createElement(
-            'p',
-            null,
-            'Default'
-          );
-      }
-    }
-  }, {
-    key: 'render',
+  _createClass(FieldMain, [{
+    key: "render",
     value: function render() {
+      var data = this.state.data;
       return React.createElement(
-        'div',
-        { className: 'panel-side' },
-        React.createElement(
-          'div',
-          { className: 'content-side' },
-          this.renderComponent()
-        )
+        "button",
+        { className: "field-button main-field-button" },
+        data.name,
+        " - ",
+        data.pk
       );
     }
   }]);
 
-  return SideContent;
+  return FieldMain;
 }(React.Component);

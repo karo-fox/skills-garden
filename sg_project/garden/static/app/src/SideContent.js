@@ -5,10 +5,19 @@ class SideContent extends React.Component {
     super(props);
   }
 
+  renderComponent() {
+    switch(this.props.show) {
+      case 'fields': return <Fields section="main-content" />
+      default: return <p>Default</p>
+    }
+  }
+
   render() {
     return (
-      <div className="content-side">
-        Side Content here
+      <div className="panel-side">
+        <div className="content-side">
+          {this.renderComponent()}
+        </div>
       </div>
     );
   }

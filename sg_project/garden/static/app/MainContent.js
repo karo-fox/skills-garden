@@ -14,16 +14,39 @@ var MainContent = function (_React$Component) {
   function MainContent(props) {
     _classCallCheck(this, MainContent);
 
-    return _possibleConstructorReturn(this, (MainContent.__proto__ || Object.getPrototypeOf(MainContent)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (MainContent.__proto__ || Object.getPrototypeOf(MainContent)).call(this, props));
+
+    _this.state = {
+      show: props.show
+    };
+    return _this;
   }
 
   _createClass(MainContent, [{
-    key: "render",
+    key: 'renderComponent',
+    value: function renderComponent() {
+      switch (this.state.show) {
+        case 'fields':
+          return React.createElement(Fields, { section: 'main-content' });
+        default:
+          return React.createElement(
+            'p',
+            null,
+            'Default'
+          );
+      }
+    }
+  }, {
+    key: 'render',
     value: function render() {
       return React.createElement(
-        "div",
-        { className: "content-main" },
-        React.createElement(Fields, null)
+        'div',
+        { className: 'panel-main' },
+        React.createElement(
+          'div',
+          { className: 'content-main' },
+          this.renderComponent()
+        )
       );
     }
   }]);

@@ -1,11 +1,11 @@
 'use strict';
 
-class JSONResponse extends React.Component {
+class Fields extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       error: null,
-      data: []
+      fields: []
     }
   }
 
@@ -15,7 +15,7 @@ class JSONResponse extends React.Component {
         .then(
           (result) => {
             this.setState({
-              data: result.data
+              fields: result.fields
             });
           },
           (error) => {
@@ -24,11 +24,10 @@ class JSONResponse extends React.Component {
             });
           }
         )
-
     }
   
     render() {
-      const { error, data } = this.state;
+      const { error, fields } = this.state;
       if (error) {
         return (
           <div>Error: {error.message}</div>
@@ -36,9 +35,9 @@ class JSONResponse extends React.Component {
       } else {
         return (
           <ul>
-            {data.map(data => (
-              <li key={data.pk}>
-                {data.name} - {data.description}
+            {fields.map(field => (
+              <li key={field.pk}>
+                {field.name} - {field.description}
               </li>
             ))}
           </ul>

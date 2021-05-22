@@ -8,25 +8,69 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MainContent = function (_React$Component) {
-  _inherits(MainContent, _React$Component);
+var Fields = function (_React$Component) {
+  _inherits(Fields, _React$Component);
 
-  function MainContent(props) {
-    _classCallCheck(this, MainContent);
+  function Fields(props) {
+    _classCallCheck(this, Fields);
 
-    return _possibleConstructorReturn(this, (MainContent.__proto__ || Object.getPrototypeOf(MainContent)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Fields.__proto__ || Object.getPrototypeOf(Fields)).call(this, props));
+
+    _this.state = {
+      error: null,
+      fields: []
+    };
+    return _this;
   }
 
-  _createClass(MainContent, [{
-    key: "render",
+  _createClass(Fields, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      fetch('fields').then(function (res) {
+        return res.json();
+      }).then(function (result) {
+        _this2.setState({
+          fields: result.fields
+        });
+      }, function (error) {
+        _this2.setState({
+          error: error
+        });
+      });
+    }
+  }, {
+    key: 'render',
     value: function render() {
-      return React.createElement(
-        "div",
-        { className: "content-main" },
-        React.createElement(Fields, null)
-      );
+      var _state = this.state,
+          error = _state.error,
+          fields = _state.fields;
+
+      if (error) {
+        return React.createElement(
+          'div',
+          null,
+          'Error: ',
+          error.message
+        );
+      } else {
+        return React.createElement(
+          'ul',
+          null,
+          fields.map(function (field) {
+            return React.createElement(
+              'li',
+              { key: field.pk },
+              field.name,
+              ' - ',
+              field.description
+            );
+          })
+        );
+      }
     }
   }]);
 
-  return MainContent;
+  return Fields;
 }(React.Component);

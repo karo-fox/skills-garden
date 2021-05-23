@@ -7,7 +7,7 @@ class SideContent extends React.Component {
 
   renderComponent() {
     switch(this.props.show) {
-      case 'fields': return <Fields section="main-content" />
+      case 'fields': return <Fields fields={this.props.fields} error={this.props.error} section="main-content" />
       default: return <p>Default</p>
     }
   }

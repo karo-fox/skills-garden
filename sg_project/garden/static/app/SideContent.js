@@ -22,7 +22,7 @@ var SideContent = function (_React$Component) {
     value: function renderComponent() {
       switch (this.props.show) {
         case 'fields':
-          return React.createElement(Fields, { section: 'main-content' });
+          return React.createElement(Fields, { fields: this.props.fields, error: this.props.error, section: 'main-content' });
         default:
           return React.createElement(
             'p',

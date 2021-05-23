@@ -5,9 +5,28 @@ class App extends React.Component {
     super(props);
     this.state = {
       side: '',
-      main: 'fields'
+      main: 'fields',
+      fields: [],
+      error: null
     }
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    fetch('fields')
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            fields: result.fields
+          });
+        },
+        (error) => {
+          this.setState({
+            error
+          });
+        }
+      )
   }
 
   handleClick() {
@@ -17,7 +36,7 @@ class App extends React.Component {
   }
 
   render() {
-    const {main, side} = this.state;
+    const {main, side, fields, error} = this.state;
     return (
       <div id="content">
         <header>
@@ -25,8 +44,8 @@ class App extends React.Component {
           <SideNavbar handler={this.handleClick} />
         </header>
         <section className="main">
-          <MainContent show={main} />
-          <SideContent show={side} />
+          <MainContent fields={fields} error={error} show={main} />
+          <SideContent fields={fields} error={error} show={side} />
         </section>
         <Footer />
       </div>

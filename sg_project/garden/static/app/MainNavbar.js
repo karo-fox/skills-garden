@@ -23,7 +23,11 @@ var MainNavbar = function (_React$Component) {
       return React.createElement(
         "div",
         { className: "navbar-main" },
-        "Main Navbar here"
+        React.createElement(
+          "div",
+          { className: "navbar-content" },
+          "Main Navbar here"
+        )
       );
     }
   }]);

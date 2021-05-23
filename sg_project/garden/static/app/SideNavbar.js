@@ -23,11 +23,14 @@ var SideNavbar = function (_React$Component) {
       return React.createElement(
         "div",
         { className: "navbar-side" },
-        "Side Navbar here",
         React.createElement(
-          "button",
-          { onClick: this.props.handler, className: "navbar-button" },
-          "Fields"
+          "div",
+          { className: "navbar-content" },
+          React.createElement(
+            "button",
+            { onClick: this.props.handler, className: "navbar-button" },
+            "Fields"
+          )
         )
       );
     }

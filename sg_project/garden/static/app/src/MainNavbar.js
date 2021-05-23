@@ -8,7 +8,9 @@ class MainNavbar extends React.Component {
     render() {
       return (
         <div className="navbar-main">
-          Main Navbar here
+          <div className="navbar-content">
+            Main Navbar here
+          </div>
         </div>
       );
     }

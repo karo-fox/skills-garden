@@ -14,18 +14,13 @@ var FieldSide = function (_React$Component) {
   function FieldSide(props) {
     _classCallCheck(this, FieldSide);
 
-    var _this = _possibleConstructorReturn(this, (FieldSide.__proto__ || Object.getPrototypeOf(FieldSide)).call(this, props));
-
-    _this.state = {
-      data: props.data
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (FieldSide.__proto__ || Object.getPrototypeOf(FieldSide)).call(this, props));
   }
 
   _createClass(FieldSide, [{
     key: "render",
     value: function render() {
-      var data = this.state.data;
+      var data = this.props.data;
       return React.createElement(
         "button",
         { className: "field-button side-field-button" },

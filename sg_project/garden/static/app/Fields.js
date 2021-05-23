@@ -14,75 +14,51 @@ var Fields = function (_React$Component) {
   function Fields(props) {
     _classCallCheck(this, Fields);
 
-    var _this = _possibleConstructorReturn(this, (Fields.__proto__ || Object.getPrototypeOf(Fields)).call(this, props));
-
-    _this.state = {
-      error: null,
-      fields: [],
-      section: props.section
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (Fields.__proto__ || Object.getPrototypeOf(Fields)).call(this, props));
   }
 
   _createClass(Fields, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      fetch('fields').then(function (res) {
-        return res.json();
-      }).then(function (result) {
-        _this2.setState({
-          fields: result.fields
-        });
-      }, function (error) {
-        _this2.setState({
-          error: error
-        });
-      });
-    }
-  }, {
-    key: 'render',
+    key: "render",
     value: function render() {
-      var _state = this.state,
-          error = _state.error,
-          fields = _state.fields,
-          section = _state.section;
+      var _props = this.props,
+          error = _props.error,
+          fields = _props.fields,
+          section = _props.section;
 
       if (error) {
         return React.createElement(
-          'div',
+          "div",
           null,
-          'Error: ',
+          "Error: ",
           error.message
         );
       } else {
         return React.createElement(
-          'div',
+          "div",
           null,
           section === "main-content" ? React.createElement(
-            'div',
-            { className: 'field-list-main' },
+            "div",
+            { className: "field-list-main" },
             React.createElement(
-              'ul',
+              "ul",
               null,
               fields.map(function (field) {
                 return React.createElement(
-                  'li',
+                  "li",
                   { key: field.pk },
                   React.createElement(FieldMain, { data: field })
                 );
               })
             )
           ) : React.createElement(
-            'div',
-            { className: 'field-list-side' },
+            "div",
+            { className: "field-list-side" },
             React.createElement(
-              'ul',
+              "ul",
               null,
               fields.map(function (field) {
                 return React.createElement(
-                  'li',
+                  "li",
                   { key: field.pk },
                   React.createElement(FieldSide, { data: field })
                 );

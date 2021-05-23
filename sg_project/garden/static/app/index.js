@@ -18,13 +18,32 @@ var App = function (_React$Component) {
 
     _this.state = {
       side: '',
-      main: 'fields'
+      main: 'fields',
+      fields: [],
+      error: null
     };
     _this.handleClick = _this.handleClick.bind(_this);
     return _this;
   }
 
   _createClass(App, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      fetch('fields').then(function (res) {
+        return res.json();
+      }).then(function (result) {
+        _this2.setState({
+          fields: result.fields
+        });
+      }, function (error) {
+        _this2.setState({
+          error: error
+        });
+      });
+    }
+  }, {
     key: 'handleClick',
     value: function handleClick() {
       this.setState({
@@ -36,7 +55,9 @@ var App = function (_React$Component) {
     value: function render() {
       var _state = this.state,
           main = _state.main,
-          side = _state.side;
+          side = _state.side,
+          fields = _state.fields,
+          error = _state.error;
 
       return React.createElement(
         'div',
@@ -50,8 +71,8 @@ var App = function (_React$Component) {
         React.createElement(
           'section',
           { className: 'main' },
-          React.createElement(MainContent, { show: main }),
-          React.createElement(SideContent, { show: side })
+          React.createElement(MainContent, { fields: fields, error: error, show: main }),
+          React.createElement(SideContent, { fields: fields, error: error, show: side })
         ),
         React.createElement(Footer, null)
       );

@@ -4,6 +4,19 @@ class Fields extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  get_topics(id) {
+    fetch(`${id}`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+
+        },
+        (error) => {
+
+        }
+      )
+  }
   
   render() {
     const { error, fields, section } = this.props;

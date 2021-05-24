@@ -18,6 +18,13 @@ var Fields = function (_React$Component) {
   }
 
   _createClass(Fields, [{
+    key: "get_topics",
+    value: function get_topics(id) {
+      fetch("" + id).then(function (res) {
+        return res.json();
+      }).then(function (result) {}, function (error) {});
+    }
+  }, {
     key: "render",
     value: function render() {
       var _props = this.props,

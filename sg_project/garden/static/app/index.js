@@ -20,7 +20,7 @@ var App = function (_React$Component) {
       side: '',
       main: 'fields',
       fields: [],
-      error: null
+      errors: null
     };
     _this.handleClick = _this.handleClick.bind(_this);
     return _this;
@@ -39,7 +39,7 @@ var App = function (_React$Component) {
         });
       }, function (error) {
         _this2.setState({
-          error: error
+          errors: errors.push(error)
         });
       });
     }

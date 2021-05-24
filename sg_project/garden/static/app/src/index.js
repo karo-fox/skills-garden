@@ -7,7 +7,7 @@ class App extends React.Component {
       side: '',
       main: 'fields',
       fields: [],
-      error: null
+      errors: null
     }
     this.handleClick = this.handleClick.bind(this);
   }
@@ -23,7 +23,7 @@ class App extends React.Component {
         },
         (error) => {
           this.setState({
-            error
+            errors: errors.push(error)
           });
         }
       )

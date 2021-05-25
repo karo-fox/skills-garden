@@ -1,4 +1,6 @@
-'use strict';
+import React from 'react';
+
+import Fields from './Fields';
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -25,3 +27,5 @@ class MainContent extends React.Component {
     );
   }
 }
+
+export default MainContent;

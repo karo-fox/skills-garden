@@ -1,4 +1,7 @@
-'use strict';
+import React from 'react';
+
+import FieldMain from './FieldMain';
+import FieldSide from './FieldSide';
 
 class Fields extends React.Component {
   constructor(props) {
@@ -52,3 +55,5 @@ class Fields extends React.Component {
     } 
   }
 }
+
+export default Fields;

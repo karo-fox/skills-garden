@@ -1,15 +1,6 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, TemplateView
-from django.http import JsonResponse, HttpResponse
-from django.core import serializers
+from django.http import JsonResponse
 
 from .models import Field, Topic
-
-# class HomeView(TemplateView):
-#     template_name = 'index.html'
-
-def home_view(request, *args, **kwargs):
-    return render(request, '../../front/public/index.html')
 
 def field_list_view(request, *args, **kwargs):
     field_list = Field.objects.all()
@@ -26,6 +17,7 @@ def field_list_view(request, *args, **kwargs):
             'review_frequency': field.review_frequency
         }
         response['fields'].append(data)
+    response["Access-Control-Allow-Origin"] = "*"
     return JsonResponse(response)
 
 

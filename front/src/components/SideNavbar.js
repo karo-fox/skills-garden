@@ -1,4 +1,4 @@
-'use strict';
+import React from 'react';
 
 class SideNavbar extends React.Component {
     constructor(props) {
@@ -15,3 +15,5 @@ class SideNavbar extends React.Component {
       );
     }
   }
+
+export default SideNavbar;

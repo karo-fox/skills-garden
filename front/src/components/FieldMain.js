@@ -1,4 +1,4 @@
-'use strict';
+import React from 'react';
 
 class FieldMain extends React.Component {
   constructor(props) {
@@ -12,3 +12,5 @@ class FieldMain extends React.Component {
     );
   }   
 }
+
+export default FieldMain;

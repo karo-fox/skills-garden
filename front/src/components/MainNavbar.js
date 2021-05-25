@@ -1,4 +1,4 @@
-'use strict';
+import React from 'react';
 
 class MainNavbar extends React.Component {
     constructor(props) {
@@ -15,3 +15,5 @@ class MainNavbar extends React.Component {
       );
     }
   }
+
+export default MainNavbar;

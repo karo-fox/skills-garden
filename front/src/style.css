@@ -57,6 +57,7 @@ section.main {
 div.panel-main {
     background-color: #ffffff;
     width: 70%;
+    padding: 30px 0px;
 }
 
 div.panel-side {
@@ -92,6 +93,11 @@ footer {
 }
 
 button.field-button {
+    width: 100%;
+    margin: 10px 0;
+}
+
+button.button-item {
     width: 100%;
     margin: 10px 0;
 }

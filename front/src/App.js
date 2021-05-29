@@ -13,7 +13,7 @@ class App extends React.Component {
     this.state = {
       side: '',
       main: 'fields',
-      fields: [],
+      objectList: [],
       error: null
     }
     this.handleSideNavFieldClick = this.handleSideNavFieldClick.bind(this);
@@ -26,7 +26,7 @@ class App extends React.Component {
       .then(
         (result) => {
           this.setState({
-            fields: result.fields
+            objectList: result.fields
           });
         },
         (error) => {
@@ -43,14 +43,13 @@ class App extends React.Component {
     });
   }
 
-  handleFieldClick() {
+  handleFieldClick(pk) {
     this.setState({
-      main: 'topic'
+      main: 'topic',
     })
   }
 
   render() {
-    const {side, main, fields, error} = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -58,8 +57,8 @@ class App extends React.Component {
           <SideNavbar handler={this.handleSideNavFieldClick} />
         </header>
         <section className="main">
-          <MainContent handler={this.handleFieldClick} fields={fields} error={error} show={main} />
-          <SideContent handler={this.handleFieldClick} fields={fields} error={error} show={side} />
+          <MainContent handler={this.handleFieldClick} error={this.state.error} show={main} list={this.state.objectList} />
+          <SideContent handler={this.handleFieldClick} fields={fields} error={error} show={side} fieldId={fieldId} />
         </section>
         <Footer />
       </div>

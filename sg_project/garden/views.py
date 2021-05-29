@@ -5,11 +5,11 @@ from .models import Field, Topic
 
 def field_list_view(request, *args, **kwargs):
     field_list = Field.objects.all()
-    data = {
+    response = {
         'fields': []
     }
     for field in field_list:
-        field_data = {
+        data = {
             'pk': field.id,
             'name': field.name,
             'description': field.description,
@@ -17,10 +17,8 @@ def field_list_view(request, *args, **kwargs):
             'last_reviewed': field.last_reviewed,
             'review_frequency': field.review_frequency
         }
-        data['fields'].append(field_data)
-    response = JsonResponse(data)
-    print(response.headers)
-    return response
+        response['fields'].append(data)
+    return JsonResponse(response)
 
 
 def topic_list_view(request, *args, **kwargs):

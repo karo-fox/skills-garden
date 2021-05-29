@@ -2,23 +2,23 @@ import React from 'react';
 
 import ButtonList from './ButtonList';
 
-class FieldView extends React.Component {
+class HomeView extends React.Component {
   
   constructor(props) {
     super(props);
     this.state = {
-      topics: [],
+      fields: [],
       error: null
     };
   }
 
   componentDidMount() {
-    fetch(`/garden/${this.props.parent.pk}/`)
+    fetch('/garden/fields/')
       .then(res => res.json())
       .then(
         (result) => {
           this.setState({
-            topics: result.topics
+            fields: result.fields
           });
         },
         (error) => {
@@ -31,9 +31,9 @@ class FieldView extends React.Component {
 
   render() {
     return (
-      <ButtonList objectList={this.state.topics} handler={this.props.handler} redirect="home"/>
+      <ButtonList objectList={this.state.fields} handler={this.props.handler} redirect="field"/>
     )
   }
 }
 
-export default FieldView;
+export default HomeView;

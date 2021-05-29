@@ -1,18 +1,14 @@
 import React from 'react';
 
+import FieldView from './FieldView';
 import Fields from './Fields';
 
 class MainContent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      show: props.show
-    }
-  }
 
   renderComponent() {
-    switch(this.state.show) {
-      case 'fields': return <Fields fields={this.props.fields} error={this.props.error} section="main-content" />
+    switch(this.props.show) {
+      case 'fields': return <Fields fields={this.props.fields} error={this.props.error} handler={this.props.handler} section="main-content" />
+      case 'topic': return <FieldView />
       default: return <p>Default</p>
     }
   }

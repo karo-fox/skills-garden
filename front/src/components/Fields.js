@@ -5,7 +5,7 @@ import FieldButton from './FieldButton';
 class Fields extends React.Component {
   
   render() {
-    const { error, fields, section } = this.props;
+    const { error, fields, section, handler } = this.props;
     if (error) {
       return (
         <div>Error: {error.message}</div>
@@ -18,7 +18,7 @@ class Fields extends React.Component {
               <ul>
                 {fields.map(field => (
                   <li key={field.pk}>
-                    <FieldButton data={field} section="main" />
+                    <FieldButton handler={handler} data={field} section="main" />
                   </li>
                 ))}
               </ul>
@@ -27,7 +27,7 @@ class Fields extends React.Component {
               <ul>
                 {fields.map(field => (
                   <li key={field.pk}>
-                    <FieldButton data={field} section="side" />
+                    <FieldButton handler={handler} data={field} section="side" />
                   </li>
                 ))}
               </ul>

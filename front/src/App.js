@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './style.css';
 import MainNavbar from './components/MainNavbar';
 import SideNavbar from './components/SideNavbar';
@@ -16,7 +16,8 @@ class App extends React.Component {
       fields: [],
       error: null
     }
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSideNavFieldClick = this.handleSideNavFieldClick.bind(this);
+    this.handleFieldClick = this.handleFieldClick.bind(this);
   }
 
   componentDidMount() {
@@ -36,10 +37,16 @@ class App extends React.Component {
       )
   }
 
-  handleClick () {
+  handleSideNavFieldClick () {
     this.setState({
       side: 'fields'
     });
+  }
+
+  handleFieldClick() {
+    this.setState({
+      main: 'topic'
+    })
   }
 
   render() {
@@ -48,11 +55,11 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <MainNavbar />
-          <SideNavbar handler={this.handleClick} />
+          <SideNavbar handler={this.handleSideNavFieldClick} />
         </header>
         <section className="main">
-          <MainContent fields={fields} error={error} show={main} />
-          <SideContent fields={fields} error={error} show={side} />
+          <MainContent handler={this.handleFieldClick} fields={fields} error={error} show={main} />
+          <SideContent handler={this.handleFieldClick} fields={fields} error={error} show={side} />
         </section>
         <Footer />
       </div>

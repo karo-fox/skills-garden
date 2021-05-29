@@ -14,7 +14,7 @@ class FieldButton extends React.Component {
     const data = this.props.data;
     const display = this.setDisplay(data);
     return (
-      <button className="field-button" >{display}</button>
+      <button className="field-button" onClick={this.props.handler} >{display}</button>
     );
   }   
 }

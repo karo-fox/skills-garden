@@ -1,25 +1,8 @@
 import React from 'react';
 
-import FieldMain from './FieldMain';
-import FieldSide from './FieldSide';
+import FieldButton from './FieldButton';
 
 class Fields extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  get_topics(id) {
-    fetch(`${id}`)
-      .then(res => res.json())
-      .then(
-        (result) => {
-
-        },
-        (error) => {
-
-        }
-      )
-  }
   
   render() {
     const { error, fields, section } = this.props;
@@ -35,7 +18,7 @@ class Fields extends React.Component {
               <ul>
                 {fields.map(field => (
                   <li key={field.pk}>
-                    <FieldMain data={field} />
+                    <FieldButton data={field} section="main" />
                   </li>
                 ))}
               </ul>
@@ -44,7 +27,7 @@ class Fields extends React.Component {
               <ul>
                 {fields.map(field => (
                   <li key={field.pk}>
-                    <FieldSide data={field}/>
+                    <FieldButton data={field} section="side" />
                   </li>
                 ))}
               </ul>

@@ -1,14 +1,15 @@
 from django.http import JsonResponse
+from django.shortcuts import render
 
 from .models import Field, Topic
 
 def field_list_view(request, *args, **kwargs):
     field_list = Field.objects.all()
-    response = {
+    data = {
         'fields': []
     }
     for field in field_list:
-        data = {
+        field_data = {
             'pk': field.id,
             'name': field.name,
             'description': field.description,
@@ -16,9 +17,10 @@ def field_list_view(request, *args, **kwargs):
             'last_reviewed': field.last_reviewed,
             'review_frequency': field.review_frequency
         }
-        response['fields'].append(data)
-    response["Access-Control-Allow-Origin"] = "*"
-    return JsonResponse(response)
+        data['fields'].append(field_data)
+    response = JsonResponse(data)
+    print(response.headers)
+    return response
 
 
 def topic_list_view(request, *args, **kwargs):

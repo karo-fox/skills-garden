@@ -14,13 +14,13 @@ class App extends React.Component {
       side: '',
       main: 'fields',
       fields: [],
-      errors: []
+      error: null
     }
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    fetch('http://127.0.0.1:8000/fields')
+    fetch('/garden/fields')
       .then(res => res.json())
       .then(
         (result) => {
@@ -30,7 +30,7 @@ class App extends React.Component {
         },
         (error) => {
           this.setState({
-            errors: error
+            error: error
           });
         }
       )
@@ -43,6 +43,7 @@ class App extends React.Component {
   }
 
   render() {
+    const {side, main, fields, error} = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -50,8 +51,8 @@ class App extends React.Component {
           <SideNavbar handler={this.handleClick} />
         </header>
         <section className="main">
-          <MainContent fields={null} error={null} show={null} />
-          <SideContent fields={null} error={null} show={null} />
+          <MainContent fields={fields} error={error} show={main} />
+          <SideContent fields={fields} error={error} show={side} />
         </section>
         <Footer />
       </div>

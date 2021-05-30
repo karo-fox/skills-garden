@@ -1,7 +1,17 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.views import generic
 
 from .models import Field, Topic
+
+class HomeView(generic.TemplateView):
+    template_name = "index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Home"
+        return context
+
 
 def field_list_view(request, *args, **kwargs):
     field_list = Field.objects.all()

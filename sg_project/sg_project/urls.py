@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from garden.views import HomeView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('garden/', include('garden.urls', namespace='garden'))
+    path('', HomeView.as_view(), name="home"),
+    path('garden/', include('garden.urls', namespace="garden"))
 ]

@@ -55,58 +55,24 @@ class TestUrls(SimpleTestCase):
 
 
 
-# class TestViews(TestCase):
+class TestViews(TestCase):
 
-#     def setUp(self):
-#         self.client = Client()
-#         self.urlconf = 'garden.urls'
-
-#         self.date_added = datetime.date(2021, 4, 1)
-#         self.last_reviewed = datetime.date(2021, 5, 18)
-#         self.review_frequency = datetime.timedelta(14)
-#         self.field1 = Field.objects.create(
-#             name='Test field',
-#             description='test test test',
-#             date_added=self.date_added,
-#             last_reviewed=self.last_reviewed,
-#             review_frequency=self.review_frequency
-#         )
-#         self.topic1 = Topic.objects.create(
-#             name='Test topic',
-#             description='test test test',
-#             date_added=self.date_added,
-#             last_reviewed=self.last_reviewed,
-#             field=self.field1
-#         )
+    def setUp(self):
+        self.client = Client()
     
-#     def test_home_view(self):
-#         response = self.client.get(reverse('home'))
+    def test_home_view(self):
+        response = self.client.get(reverse('home'))
         
-#         self.assertEqual(response.status_code, 200)
-#         self.assertTemplateUsed(response, 'index.html')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'index.html')
 
 
-#     def test_field_list_view(self):
-#         response = self.client.get(reverse('fields', urlconf=self.urlconf))
-#         # expected_response = {
-#         #     'fields': [{
-#         #         'pk': 1,
-#         #         'name': 'Test field',
-#         #         'description': 'test test test',
-#         #         'date_added': self.date_added.__str__(),
-#         #         'last_reviewed': self.last_reviewed.__str__(),
-#         #         'review_frequency': self.review_frequency.__repr__()
-#         #     }]
-#         # }
-#         print('-'*30)
-#         print(response)
-#         self.assertEqual(response.status_code, 200)
-#         # self.assertEqual(json.loads(response.content), expected_response)
+    def test_field_list_view(self):
+        response = self.client.get(reverse('garden:fields'))
 
-#     def test_topic_list_view(self):
-#         response = self.client.get(reverse('topics', kwargs={ 'pk': 1 }, urlconf=self.urlconf))
+        self.assertEqual(response.status_code, 200)
 
-#         print('-'*30)
-#         print(response)
+    def test_topic_list_view(self):
+        response = self.client.get(reverse('garden:topics', kwargs={ 'pk': 1 }))
 
-#         self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)

@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block main-content %}
-  <div>
+  <div onload="createList('/garden/fields/');">
     <p>HOME PAGE</p>
     <section id="objects-list" class="objects-list"></section>
   </div>
@@ -11,6 +11,6 @@
 
 {% block scripts %}
   <script>
-    createList('/garden/api/fields/');
+    createList('/garden/api/field/{{pk}}/');
   </script>
 {% endblock %}

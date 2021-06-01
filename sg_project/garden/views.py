@@ -13,6 +13,15 @@ class HomeView(generic.TemplateView):
         return context
 
 
+class FieldView(generic.TemplateView):
+    template_name = "field.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Field"
+        return context
+
+
 def field_list_view(request, *args, **kwargs):
     field_list = Field.objects.all()
     response = {
@@ -25,7 +34,8 @@ def field_list_view(request, *args, **kwargs):
             'description': field.description,
             'date_added': field.date_added,
             'last_reviewed': field.last_reviewed,
-            'review_frequency': field.review_frequency
+            'review_frequency': field.review_frequency,
+            'url': field.get_absolute_url()
         }
         response['fields'].append(data)
     return JsonResponse(response)

@@ -3,10 +3,11 @@
 {% load static %}
 
 {% block main-content %}
-  <div>
-    <p>HOME PAGE</p>
-    <section id="objects-list" class="objects-list"></section>
-  </div>
+  <header class="view-header">
+    <p class="title">HOME PAGE</p>
+    <button class="new-object button">New Field</button>
+  </header>
+  <section id="objects-list" class="objects-list"></section>
 {% endblock %}
 
 {% block scripts %}

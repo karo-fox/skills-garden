@@ -18,7 +18,7 @@ function createObjectsListElem(objectsList) {
   let ul = document.createElement('ul');
   let list = "";
   objectsList.forEach((item, index, array) => {
-    list += `<li><a href="${item.url}"><button>${item.name}</button></a></li>`;
+    list += `<li><a href="${item.url}"><button class="object-button button">${item.name}</button></a></li>`;
   });
   ul.innerHTML = list;
   return ul

@@ -6,15 +6,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }} | Skills Garden</title>
   <script src="{% static 'scripts/main.js' %}"></script>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-  {% block main-content %}
-  {% endblock %}
-
-  {% block side-content %}
-  {% endblock %}
-  
+  <nav>
+    <span class="navbar brand">Skills Garden</span>
+    <a class="nav-link" href="{% url 'garden:home' %}">Home</a>
+    <a class="nav-link" href="#">About</a>
+    <a class="nav-link" href="#">Account</a>
+  </nav>
+  <div class="main">
+    <section class="content">
+      {% block main-content %}
+      {% endblock %}
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta beatae, iste praesentium vero, corrupti quidem ea porro commodi velit cum provident magni esse deserunt officiis nobis maiores, quod fugiat veritatis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repudiandae et quam optio commodi, amet sapiente voluptas vero cum dolorum atque nisi quo architecto aut, perspiciatis obcaecati dolore iusto dolorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis qui illum eum eos facilis, quae repellat esse vel inventore deserunt necessitatibus! Totam tempora, omnis non veritatis dolores rerum! Vel, veritatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio provident, soluta error libero incidunt ut officiis suscipit a cupiditate rerum qui quidem facilis corporis deleniti. Consequuntur quos consectetur at accusantium. Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae repellendus aut excepturi. Officia optio hic incidunt unde placeat! Consequatur, fugiat provident! Dignissimos, ullam reiciendis? Dicta, nulla ex. Totam, harum magni? lortem  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis sed nihil asperiores ducimus dolore eaque iste sit fugit, beatae maxime architecto voluptatem culpa delectus, officia ipsa eos, doloremque ab minima! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi a possimus distinctio ab minus rerum corrupti architecto, id error fugit dignissimos voluptate inventore modi quas commodi porro maxime, placeat praesentium. lopreq,  Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellendus non optio sit, sapiente eos quam et velit fugit eum tempora atque asperiores itaque. Repellendus quae doloremque magnam quas nobis! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique ad error neque mollitia nobis, nulla nemo voluptates ea atque quidem quis qui quasi vero quaerat, unde temporibus, enim praesentium quos.
+    </section>
+  </div>
+  <div class="side">
+    <section class="content">
+      {% block side-content %}
+      {% endblock %}
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta beatae, iste praesentium vero, corrupti quidem ea porro commodi velit cum provident magni esse deserunt officiis nobis maiores, quod fugiat veritatis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repudiandae et quam optio commodi, amet sapiente voluptas vero cum dolorum atque nisi quo architecto aut, perspiciatis obcaecati dolore iusto dolorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis qui illum eum eos facilis, quae repellat esse vel inventore deserunt necessitatibus! Totam tempora, omnis non veritatis dolores rerum! Vel, veritatis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio provident, soluta error libero incidunt ut officiis suscipit a cupiditate rerum qui quidem facilis corporis deleniti. Consequuntur quos consectetur at accusantium. Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae repellendus aut excepturi. Officia optio hic incidunt unde placeat! Consequatur, fugiat provident! Dignissimos, ullam reiciendis? Dicta, nulla ex. Totam, harum magni? lortem  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis sed nihil asperiores ducimus dolore eaque iste sit fugit, beatae maxime architecto voluptatem culpa delectus, officia ipsa eos, doloremque ab minima! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi a possimus distinctio ab minus rerum corrupti architecto, id error fugit dignissimos voluptate inventore modi quas commodi porro maxime, placeat praesentium. lopreq,  Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus repellendus non optio sit, sapiente eos quam et velit fugit eum tempora atque asperiores itaque. Repellendus quae doloremque magnam quas nobis! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique ad error neque mollitia nobis, nulla nemo voluptates ea atque quidem quis qui quasi vero quaerat, unde temporibus, enim praesentium quos. 
+    </section>
+  </div> 
+  </div>
+  <footer class="bg-dark">
+    Copyright © 2021 by KK
+  </footer>
   {% block scripts %}
   {% endblock %}
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> -->
 </body>
 </html>

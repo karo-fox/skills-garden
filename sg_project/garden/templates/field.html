@@ -3,14 +3,15 @@
 {% load static %}
 
 {% block main-content %}
-  <div onload="createList('/garden/fields/');">
-    <p>HOME PAGE</p>
-    <section id="objects-list" class="objects-list"></section>
-  </div>
+  <header class="view-header">
+    <p class="title">{{ object.name }}</p>
+    <button class="new-object button">New Topic</button>
+  </header>
+  <section id="objects-list" class="objects-list"></section>
 {% endblock %}
 
 {% block scripts %}
   <script>
-    createList('/garden/api/field/{{pk}}/');
+    createList('/garden/api/field/{{object.pk}}/');
   </script>
 {% endblock %}

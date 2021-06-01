@@ -13,8 +13,9 @@ class HomeView(generic.TemplateView):
         return context
 
 
-class FieldView(generic.TemplateView):
+class FieldView(generic.DetailView):
     template_name = "field.html"
+    model = Field
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

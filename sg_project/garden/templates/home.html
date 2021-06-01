@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main-content %}
+  <p>HOME PAGE</p>
+  <section id="objects-list" class="objects-list"></section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'scripts/home.js' %}" ></script>
+{% endblock %}

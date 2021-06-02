@@ -11,7 +11,7 @@ class Field(models.Model):
     review_frequency = models.DurationField()
 
     def get_absolute_url(self):
-        return reverse('garden:field', kwargs={'pk': self.id})
+        return reverse('client:field', kwargs={'pk': self.id})
 
     def __str__(self):
         return self.name
@@ -31,7 +31,7 @@ class Topic(models.Model):
     last_reviewed = models.DateField()
 
     def get_absolute_url(self):
-        return reverse('garden:topic', kwargs={'field_pk': self.field.id, 'pk': self.id})
+        return reverse('garden:topics-list', kwargs={'pk': self.id})
 
     def __str__(self):
         return self.name

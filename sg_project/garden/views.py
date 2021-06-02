@@ -4,24 +4,6 @@ from django.views import generic
 
 from .models import Field, Topic
 
-class HomeView(generic.TemplateView):
-    template_name = "home.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = "Home"
-        return context
-
-
-class FieldView(generic.DetailView):
-    template_name = "field.html"
-    model = Field
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = "Field"
-        return context
-
 
 def field_list_view(request, *args, **kwargs):
     field_list = Field.objects.all()

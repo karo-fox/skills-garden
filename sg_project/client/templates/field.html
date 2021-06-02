@@ -4,14 +4,14 @@
 
 {% block main-content %}
   <header class="view-header">
-    <p class="title">HOME PAGE</p>
-    <button class="new-object button">New Field</button>
+    <p class="title">{{ object.name }}</p>
+    <button class="new-object button">New Topic</button>
   </header>
   <section id="objects-list" class="objects-list"></section>
 {% endblock %}
 
 {% block scripts %}
   <script>
-    createList('/garden/api/fields/');
+    createList('/garden/field/{{object.pk}}/');
   </script>
 {% endblock %}

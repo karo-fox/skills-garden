@@ -35,7 +35,8 @@ def topic_list_view(request, *args, **kwargs):
             'name': topic.name,
             'description': topic.description,
             'date_added': topic.date_added,
-            'last_reviewed': topic.last_reviewed
+            'last_reviewed': topic.last_reviewed,
+            'url': topic.get_absolute_url()
         }
         response['topics'].append(data)
     return JsonResponse(response)

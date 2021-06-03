@@ -5,7 +5,7 @@ from django.test import TestCase, SimpleTestCase, Client
 from django.urls import reverse, resolve
 
 from .models import Field, Topic
-from .views import HomeView, FieldView, field_list_view, topic_list_view
+from .views import field_list_view, topic_list_view
 
 
 
@@ -40,14 +40,6 @@ class TestModels(TestCase):
 
 
 class TestUrls(SimpleTestCase):
-
-    def test_home_url_resolves(self):
-        url = reverse('garden:home')
-        self.assertEqual(resolve(url).func.view_class, HomeView)
-
-    def test_field_url_resolves(self):
-        url = reverse('garden:field', kwargs={'pk': 1})
-        self.assertEqual(resolve(url).func.view_class, FieldView)
     
     def test_fields_list_url_resolves(self):
         url = reverse('garden:fields-list')
@@ -63,19 +55,6 @@ class TestViews(TestCase):
 
     def setUp(self):
         self.client = Client()
-    
-    def test_home_view(self):
-        response = self.client.get(reverse('garden:home'))
-        
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'home.html')
-    
-    def test_field_view(self):
-        response = self.client.get(reverse('garden:field', kwargs={ 'pk': 1}))
-
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'field.html')
-
 
     def test_fields_list_view(self):
         response = self.client.get(reverse('garden:fields-list'))

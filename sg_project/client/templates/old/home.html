@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main-content %}
+  <header class="view-header">
+    <p class="title">HOME PAGE</p>
+    <section class="buttons-bar">
+      <button key="field-list" class="button">Fields</button>
+      <button class="new-object button">New Field</button>
+    </section>
+  </header>
+  <section id="objects-list" class="objects-list"></section>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    createList('/garden/fields/');
+    addEventListener()
+  </script>
+{% endblock %}

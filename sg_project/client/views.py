@@ -3,6 +3,8 @@ from django.views import generic
 
 from garden.models import Field, Topic
 
+
+
 class HomeView(generic.TemplateView):
     template_name = "home.html"
 

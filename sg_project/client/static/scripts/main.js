@@ -1,26 +1,12 @@
-function createList(url) {
-  loadData(url)
-  .then(resolve => {
-    let ol = createObjectsListElem(Object.values(resolve));
-    let parent = document.getElementById('objects-list');
-    parent.insertAdjacentElement('afterbegin', ol);
-  })
-  .catch(error => console.log(`ERROR: ${error}`));
-}
+$(document).ready(function() {
   
-async function loadData(url) {
-  let response = await fetch(url);
-  let fields = await response.json();
-  return fields;
-}
+  // Check for click events on the navbar burger icon
+  $(".navbar-burger").click(function() {
 
-function createObjectsListElem(objectsList) {
-  console.log(objectsList);
-  let ul = document.createElement('ul');
-  let list = "";
-  objectsList.forEach((item, index, array) => {
-    list += `<li><a href="${item.url}"><button class="object-button button">${item.name} - ${item.date_added}</button></a></li>`;
+    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    $(".navbar-burger").toggleClass("is-active");
+    $(".navbar-menu").toggleClass("is-active");
+
   });
-  ul.innerHTML = list;
-  return ul
-}
+
+});

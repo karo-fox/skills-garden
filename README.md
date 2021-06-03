@@ -6,4 +6,3 @@ Work in progress
 - python
 - Django
 - Django REST framework
-- HTML, CSS & JS in templates

@@ -1,20 +1,10 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
 {% block main-content %}
-  <header class="view-header">
-    <p class="title">HOME PAGE</p>
-    <section class="buttons-bar">
-      <button class="button">Fields</button>
-      <button class="new-object button">New Field</button>
-    </section>
-  </header>
-  <section id="objects-list" class="objects-list"></section>
+{% include 'components/_content.html' with list="Fields" new="New Field" %}
 {% endblock %}
 
 {% block scripts %}
-  <script>
-    createList('/garden/fields/');
-  </script>
+<script src="{% static 'scripts/tab.js' %}"></script>
 {% endblock %}

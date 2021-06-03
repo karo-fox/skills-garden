@@ -1,7 +1,7 @@
 function createList(url) {
   loadData(url)
   .then(resolve => {
-    let ol = createObjectsListElem(Object.values(resolve)[0]);
+    let ol = createObjectsListElem(Object.values(resolve));
     let parent = document.getElementById('objects-list');
     parent.insertAdjacentElement('afterbegin', ol);
   })
@@ -15,6 +15,7 @@ async function loadData(url) {
 }
 
 function createObjectsListElem(objectsList) {
+  console.log(objectsList);
   let ul = document.createElement('ul');
   let list = "";
   objectsList.forEach((item, index, array) => {

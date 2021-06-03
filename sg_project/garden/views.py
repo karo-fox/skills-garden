@@ -2,41 +2,33 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import generic
 
+from rest_framework import generics
+from rest_framework.response import Response
+
 from .models import Field, Topic
+from .serializers import FieldSerializer, TopicSerializer
 
 
-def field_list_view(request, *args, **kwargs):
-    field_list = Field.objects.all()
-    response = {
-        'fields': []
-    }
-    for field in field_list:
-        data = {
-            'pk': field.id,
-            'name': field.name,
-            'description': field.description,
-            'date_added': field.date_added,
-            'last_reviewed': field.last_reviewed,
-            'review_frequency': field.review_frequency,
-            'url': field.get_absolute_url()
-        }
-        response['fields'].append(data)
-    return JsonResponse(response)
+
+class FieldList(generics.ListAPIView):
+    queryset = Field.objects.all()
+    serializer_class = FieldSerializer
+
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = FieldSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
-def topic_list_view(request, *args, **kwargs):
-    topic_list = Topic.objects.filter(field_id = kwargs['pk'])
-    response = {
-        'topics': []
-    }
-    for topic in topic_list:
-        data = {
-            'pk': topic.id,
-            'name': topic.name,
-            'description': topic.description,
-            'date_added': topic.date_added,
-            'last_reviewed': topic.last_reviewed,
-            'url': topic.get_absolute_url()
-        }
-        response['topics'].append(data)
-    return JsonResponse(response)
+
+class TopicList(generics.ListAPIView):
+    serializer_class = TopicSerializer
+
+    def get_queryset(self, pk):
+        queryset = Topic.objects.filter(field__id = pk)
+        return queryset
+
+    def list(self, request, pk):
+        queryset = self.get_queryset(pk)
+        serializer = TopicSerializer(queryset, many=True)
+        return Response(serializer.data)

@@ -5,8 +5,12 @@
 {% block main-content %}
   <header class="view-header">
     <p class="title">{{ object.name }}</p>
-    <button class="new-object button">New Topic</button>
+    <section class="buttons-bar">
+      <button class="button">Topics</button>
+      <button class="new-object button">New Topic</button>
+    </section>
   </header>
+  <p>{{ object.description }}</p>
   <section id="objects-list" class="objects-list"></section>
 {% endblock %}
 

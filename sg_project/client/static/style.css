@@ -92,6 +92,7 @@ nav {
     font-size: 40px;
     font-weight: bold;
     display: inline-block;
+    width: 30vh;
 }
 
 .view-header {
@@ -100,4 +101,9 @@ nav {
 
 .new-object {
     display: inline-block;
+}
+
+.buttons-bar {
+    display: inline-block;
+    width: 30vh;
 }

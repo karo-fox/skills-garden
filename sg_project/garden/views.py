@@ -10,23 +10,34 @@ from .serializers import FieldSerializer, TopicSerializer
 
 
 
-class FieldList(generics.ListAPIView):
+class FieldListCreate(generics.ListCreateAPIView):
     queryset = Field.objects.all()
     serializer_class = FieldSerializer
+
 
     def list(self, request):
         queryset = self.get_queryset()
         serializer = FieldSerializer(queryset, many=True)
         return Response(serializer.data)
+    
+
+    def create(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid()
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, headers=headers)
 
 
 
 class TopicList(generics.ListAPIView):
     serializer_class = TopicSerializer
 
+
     def get_queryset(self, pk):
         queryset = Topic.objects.filter(field__id = pk)
         return queryset
+
 
     def list(self, request, pk):
         queryset = self.get_queryset(pk)

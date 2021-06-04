@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load rest_framework %}
 
 {% block main-content %}
 {% include 'components/_content.html' with list="Fields" new="New Field" %}
@@ -8,6 +9,8 @@
 {% block scripts %}
 <script src="{% static 'scripts/tab.js' %}"></script>
 <script>
-    tab('/garden/fields/', 'fields');
+  let form = `{% csrf_token %}
+  {{ form|escapejs }}`
+  tab(`/garden/fields/`, 'fields', form, `/garden/fields/`);
 </script>
 {% endblock %}

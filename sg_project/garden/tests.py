@@ -5,7 +5,7 @@ from django.test import TestCase, SimpleTestCase, Client
 from django.urls import reverse, resolve
 
 from .models import Field, Topic
-from .views import FieldList, TopicList
+from .views import FieldListCreate, TopicList
 
 
 
@@ -43,12 +43,12 @@ class TestModels(TestCase):
 class TestUrls(SimpleTestCase):
     
     def test_fields_list_url_resolves(self):
-        url = reverse('garden:fields-list')
-        self.assertEqual(resolve(url).func.view_class, FieldList)
+        url = reverse('garden:fields')
+        self.assertEqual(resolve(url).func.view_class, FieldListCreate)
     
 
     def test_topics_list_url_resolves(self):
-        url = reverse('garden:topics-list', kwargs={'pk': 1})
+        url = reverse('garden:topics', kwargs={'pk': 1})
         self.assertEqual(resolve(url).func.view_class, TopicList)
 
 
@@ -60,12 +60,12 @@ class TestViews(TestCase):
 
 
     def test_fields_list_view(self):
-        response = self.client.get(reverse('garden:fields-list'))
+        response = self.client.get(reverse('garden:fields'))
 
         self.assertEqual(response.status_code, 200)
 
 
     def test_topics_list_view(self):
-        response = self.client.get(reverse('garden:topics-list', kwargs={ 'pk': 1 }))
+        response = self.client.get(reverse('garden:topics', kwargs={ 'pk': 1 }))
 
         self.assertEqual(response.status_code, 200)

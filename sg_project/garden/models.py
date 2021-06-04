@@ -6,8 +6,8 @@ class Field(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     # user = models.ForeignKey(User)
-    date_added = models.DateField(auto_now_add=True)
-    last_reviewed = models.DateField()
+    date_added = models.DateField(auto_now_add=True, blank=True)
+    last_reviewed = models.DateField(auto_now=True)
     review_frequency = models.DurationField()
 
     def get_absolute_url(self):

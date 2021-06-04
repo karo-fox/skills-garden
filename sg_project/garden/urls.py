@@ -1,9 +1,9 @@
 from django.urls import path
 
-from .views import FieldList, TopicList
+from .views import FieldListCreate, TopicList
 
 app_name = 'garden'
 urlpatterns = [
-    path('fields/', FieldList.as_view(), name='fields-list'),
-    path('<int:pk>/', TopicList.as_view(), name='topics-list')
+    path('fields/', FieldListCreate.as_view(), name='fields'),
+    path('<int:pk>/', TopicList.as_view(), name='topics')
 ]

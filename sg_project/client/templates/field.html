@@ -9,6 +9,6 @@
 <script src="{% static 'scripts/tab.js' %}"></script>
 <script>
     let id = "{{ object.pk }}";
-    tab(`/garden/${id}/`, 'topics');
+    tab(url=`/garden/${id}/`, type='topics', form='form');
 </script>
 {% endblock %}

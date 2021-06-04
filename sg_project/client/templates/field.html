@@ -2,12 +2,13 @@
 {% load static %}
 
 {% block main-content %}
-{% include 'components/_content.html' with list="Fields" new="New Field" %}
+{% include 'components/_content.html' with list="Topics" new="New Topic" %}
 {% endblock %}
 
 {% block scripts %}
 <script src="{% static 'scripts/tab.js' %}"></script>
 <script>
-    tab('/garden/fields/');
+    let id = "{{ object.pk }}";
+    tab(`/garden/${id}/`);
 </script>
 {% endblock %}

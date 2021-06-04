@@ -21,12 +21,12 @@ class FieldListCreate(generics.ListCreateAPIView):
         return Response(serializer.data)
     
 
-    def create(self, request):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid()
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, headers=headers)
+    # def create(self, request):
+    #     serializer = self.get_serializer(data=request.data)
+    #     serializer.is_valid()
+    #     self.perform_create(serializer)
+    #     headers = self.get_success_headers(serializer.data)
+    #     return Response(serializer.data, headers=headers)
 
 
 

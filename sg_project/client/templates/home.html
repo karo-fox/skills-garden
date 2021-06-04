@@ -10,7 +10,14 @@
 <script src="{% static 'scripts/tab.js' %}"></script>
 <script>
   let form = `{% csrf_token %}
-  {{ form|escapejs }}`
+  {% for field in form %}
+  <div class="field">
+    <label class="label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+    <div class="control">
+      <input id="{{ field.id_for_label }}" name="{{ field.name }}" class="input" type="{{ field.widget_type }}" required="">
+    </div>
+  </div>
+  {% endfor %}`
   tab(`/garden/fields/`, 'fields', form, `/garden/fields/`);
 </script>
 {% endblock %}

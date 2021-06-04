@@ -1,9 +1,9 @@
-function tab(url) {
-  createList(url);
+function tab(url, type) {
+  createList(url, type);
   $(".tab-item").on("click", function(e) {
     $(this).addClass("is-active").siblings().removeClass("is-active");
     if(this.id === "list") {
-      createList(url);
+      createList(url, type);
     } else if(this.id === "create") {
       $('.main-section').html('<p>Create Form</p>');
     } else if(this.id === "journal") {
@@ -14,10 +14,15 @@ function tab(url) {
   });
 }
 
-function createList(url) {
+function createList(url, type) {
+  console.log(type);
   $.getJSON(url, function(data) {
     objects = data.map(function(item) {
-      return `<div class="block"><a href="${item.url}"><button class=" level button is-black is-fullwidth"><div class="level-left">${item.name}</div><div class="left-right">${item.last_reviewed}</div></button></a></div>`
+      if(type === 'fields' || type === 'topics') {
+        return `<div class="block"><a href="${item.url}"><button class=" level button is-black is-fullwidth"><div class="level-left">${item.name}</div><div class="left-right">${item.last_reviewed}</div></button></a></div>`
+      } else if(type === 'sources') {
+        return `<div class="block">Source</div>`;
+      }
     });
     $('.main-section').html(objects);
   });

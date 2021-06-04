@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block main-content %}
-{% include 'components/_content.html' with list="Fields" new="New Field" %}
+{% include 'components/_content.html' with list="Sources" new="New Source" %}
 {% endblock %}
 
 {% block scripts %}
 <script src="{% static 'scripts/tab.js' %}"></script>
 <script>
-    tab('/garden/fields/', 'fields');
+    tab('/garden/fields/', 'sources');
 </script>
 {% endblock %}

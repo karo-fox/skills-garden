@@ -5,7 +5,7 @@ from django.test import TestCase, SimpleTestCase, Client
 from django.urls import reverse, resolve
 
 from .models import Field, Topic
-from .views import FieldListCreate, TopicList
+from .views import FieldListCreate, TopicListCreate
 
 
 
@@ -49,7 +49,7 @@ class TestUrls(SimpleTestCase):
 
     def test_topics_list_url_resolves(self):
         url = reverse('garden:topics', kwargs={'pk': 1})
-        self.assertEqual(resolve(url).func.view_class, TopicList)
+        self.assertEqual(resolve(url).func.view_class, TopicListCreate)
 
 
 

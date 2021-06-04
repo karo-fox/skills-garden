@@ -28,7 +28,7 @@ class Topic(models.Model):
     description = models.TextField()
     field = models.ForeignKey(Field, on_delete=models.CASCADE)
     date_added = models.DateField(auto_now_add=True)
-    last_reviewed = models.DateField()
+    last_reviewed = models.DateField(auto_now=True)
 
     def get_absolute_url(self):
         return reverse('client:topic', kwargs={'field_pk': self.field.id, 'pk': self.id})

@@ -8,7 +8,16 @@
 {% block scripts %}
 <script src="{% static 'scripts/tab.js' %}"></script>
 <script>
-    let id = "{{ object.pk }}";
-    tab(url=`/garden/${id}/`, type='topics', form='form');
+  let form = `{% csrf_token %}
+  {% for field in form %}
+  <div class="field">
+    <label class="label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+    <div class="control">
+      <input id="{{ field.id_for_label }}" name="{{ field.name }}" class="input" type="{{ field.widget_type }}" required="">
+    </div>
+  </div>
+  {% endfor %}`
+  let id = "{{ object.pk }}";
+  tab(`/garden/${id}/`, 'topics', form, `/garden/${id}/`);
 </script>
 {% endblock %}

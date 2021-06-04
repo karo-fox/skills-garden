@@ -19,18 +19,11 @@ class FieldListCreate(generics.ListCreateAPIView):
         queryset = self.get_queryset()
         serializer = FieldSerializer(queryset, many=True)
         return Response(serializer.data)
-    
-
-    # def create(self, request):
-    #     serializer = self.get_serializer(data=request.data)
-    #     serializer.is_valid()
-    #     self.perform_create(serializer)
-    #     headers = self.get_success_headers(serializer.data)
-    #     return Response(serializer.data, headers=headers)
 
 
 
-class TopicList(generics.ListAPIView):
+
+class TopicListCreate(generics.ListCreateAPIView):
     serializer_class = TopicSerializer
 
 

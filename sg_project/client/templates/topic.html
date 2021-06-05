@@ -2,12 +2,26 @@
 {% load static %}
 
 {% block main-content %}
+<header class="container">
+  <div class="level">
+    <div class="level-left">
+      <p class="title">{{ object.name }}</p>
+    </div>
+    <div class="level-right">
+      <div class="buttons">
+        <button class="button is-link">Edit</button>
+        <button class="button is-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+  <p class="subtitle">{{ object.description }}</p>
+</header>
 {% include 'components/_content.html' with list="Sources" new="New Source" %}
 {% endblock %}
 
 {% block scripts %}
 <script src="{% static 'scripts/tab.js' %}"></script>
 <script>
-    tab('/garden/fields/', 'sources');
+  tab('/garden/fields/', 'sources');
 </script>
 {% endblock %}

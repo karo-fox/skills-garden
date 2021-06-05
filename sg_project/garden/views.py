@@ -15,11 +15,14 @@ class FieldListCreate(generics.ListCreateAPIView):
     serializer_class = FieldSerializer
 
 
-    def list(self, request):
-        queryset = self.get_queryset()
-        serializer = FieldSerializer(queryset, many=True)
-        return Response(serializer.data)
 
+class FieldDestroy(generics.DestroyAPIView):
+    serializer_class = FieldSerializer
+
+
+    def get_queryset(self):
+        queryset = Field.objects.filter(id = self.kwargs['pk'])
+        return queryset
 
 
 

@@ -20,6 +20,9 @@
     <div class="control">
       <input id="{{ field.id_for_label }}" name="{{ field.name }}" class="input" type="{{ field.widget_type }}" required="">
     </div>
+    {% if field.help_text %}
+    <p class="help">{{ field.help_text }}</p>
+    {% endif %}
   </div>
   {% endfor %}`
   tab(`/garden/fields/`, 'fields', form, `/garden/fields/`);

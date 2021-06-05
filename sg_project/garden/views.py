@@ -16,7 +16,7 @@ class FieldListCreate(generics.ListCreateAPIView):
 
 
 
-class FieldDestroy(generics.DestroyAPIView):
+class FieldDestroy(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = FieldSerializer
 
 

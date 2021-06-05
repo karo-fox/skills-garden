@@ -8,7 +8,7 @@ class Field(models.Model):
     # user = models.ForeignKey(User)
     date_added = models.DateField(auto_now_add=True, blank=True)
     last_reviewed = models.DateField(auto_now=True)
-    review_frequency = models.DurationField()
+    review_frequency = models.IntegerField()
 
     def get_absolute_url(self):
         return reverse('client:field', kwargs={'pk': self.id})

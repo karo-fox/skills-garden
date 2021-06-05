@@ -1,4 +1,4 @@
-function tab(listUrl, type, form, formUrl, id, token) {
+function tab(listUrl, type, form, formUrl, id, editForm) {
   createList(listUrl, type);
   $(".tab-item").on("click", function(e) {
     $(this).addClass("is-active").siblings().removeClass("is-active");
@@ -15,17 +15,33 @@ function tab(listUrl, type, form, formUrl, id, token) {
   const csrftoken = getCookie('csrftoken');
   $('#delete').click(function(e) {
     $.ajax({
-      url: `../garden/${id}/delete/`,
+      url: `../garden/${id}/action/`,
       headers: {'X-CSRFToken': csrftoken},
       method: "DELETE"
     }).done(function() {
-      console.log('field was destroyed');
       window.location.href = '/';
     });
   });
   
   $('#edit').click(function(e) {
-    console.log('edit was clicked');
+    $('.modal').addClass("is-active");
+    $('#editFormBlock').html(editForm);
+    $('#editForm').submit(function(e) {
+      e.preventDefault();
+      console.log("tried to submit");
+      let form = $(this);
+      $.ajax({
+        url: `../garden/${id}/action/`,
+        method: "PUT",
+        headers: {'X-CSRFToken': csrftoken},
+        data: form.serialize(),
+      }).done(function() {
+        window.location.href = '/';
+      });
+    });
+    $('.modal-background').on('click', function() {
+      $('.modal').removeClass("is-active");
+    })
   });
 }
 

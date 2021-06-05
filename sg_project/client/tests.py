@@ -31,7 +31,7 @@ class TestViews(TestCase):
     def setUp(self):
         self.client = Client()
         self.Field = Field.objects.create(name="TEST", description="test test test", date_added=datetime.date(2021, 5, 13),
-                                          last_reviewed=datetime.date(2021, 6, 1), review_frequency=datetime.timedelta(14))
+                                          last_reviewed=datetime.date(2021, 6, 1), review_frequency=14)
         self.Topic = Topic.objects.create(name="TEST", description="test test test", date_added=datetime.date(2021, 5, 13),
                                           last_reviewed=datetime.date(2021, 6, 1), field=self.Field)
     

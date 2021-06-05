@@ -26,7 +26,8 @@ class FieldView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "Field"
-        context['form'] = TopicForm
+        context['create_form'] = TopicForm
+        context['edit_form'] = FieldForm
         return context
 
 

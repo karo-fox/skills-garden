@@ -1,42 +1,46 @@
-function tab(listUrl, type, form, formUrl, id, editForm) {
+const csrftoken = getCookie('csrftoken');
+const host = 'http://127.0.0.1:8000'
+
+function tab(listUrl, type, form) {
   createList(listUrl, type);
   $(".tab-item").on("click", function(e) {
     $(this).addClass("is-active").siblings().removeClass("is-active");
     if(this.id === "list") {
       createList(listUrl, type);
     } else if(this.id === "create") {
-      createForm(form, formUrl);
+      createForm(form, listUrl);
     } else if(this.id === "journal") {
       $('.main-section').html('<p>Journal</p>');
     } else {
       console.log("none");
     }
   });
-  const csrftoken = getCookie('csrftoken');
-  $('#delete').click(function(e) {
+}
+
+function actionButtons(url, backUrl, editForm) {
+  $('#delete').click(function() {
     $.ajax({
-      url: `../garden/${id}/action/`,
+      url: `${host}/${url}/action/`,
       headers: {'X-CSRFToken': csrftoken},
       method: "DELETE"
     }).done(function() {
-      window.location.href = '/';
+      window.location.href = `${host}/${backUrl}`;
     });
   });
   
-  $('#edit').click(function(e) {
+  $('#edit').click(function() {
     $('.modal').addClass("is-active");
     $('#editFormBlock').html(editForm);
     $('#editForm').submit(function(e) {
       e.preventDefault();
-      console.log("tried to submit");
       let form = $(this);
       $.ajax({
-        url: `../garden/${id}/action/`,
+        url: `${host}/${url}/action/`,
         method: "PUT",
         headers: {'X-CSRFToken': csrftoken},
         data: form.serialize(),
       }).done(function() {
-        window.location.href = '/';
+        window.location.href = `${host}/${backUrl}`;
       });
     });
     $('.modal-background').on('click', function() {
@@ -47,7 +51,7 @@ function tab(listUrl, type, form, formUrl, id, editForm) {
 
 
 function createList(url, type) {
-  $.getJSON(url, function(data) {
+  $.getJSON(`${host}/${url}/`, function(data) {
     objects = data.map(function(item) {
       if(type === 'fields' || type === 'topics') {
         return `<div class="block"><a href="${item.url}"><div class="level box"><div class="level-left">${item.name}</div><div class="left-right">${item.last_reviewed}</div></div></a></div>`;
@@ -67,7 +71,7 @@ function createForm(content, url) {
     e.preventDefault();
     let form = $(this);
     $.ajax({
-      url: url,
+      url: `${host}/${url}/`,
       method: "POST",
       data: form.serialize(),
     }).done(function() {

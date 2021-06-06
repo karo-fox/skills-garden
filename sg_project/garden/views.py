@@ -39,3 +39,13 @@ class TopicListCreate(generics.ListCreateAPIView):
         queryset = self.get_queryset(pk)
         serializer = TopicSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+
+class TopicUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = TopicSerializer
+
+
+    def get_queryset(self):
+        queryset = Topic.objects.filter(id = self.kwargs['pk'])
+        return queryset

@@ -40,4 +40,6 @@ class TopicView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "Topic"
+        context['field_pk'] = self.kwargs['field_pk']
+        context['edit_form'] = TopicForm
         return context

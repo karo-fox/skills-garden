@@ -59,25 +59,33 @@ class TestUrls(SimpleTestCase):
 
 
 
-class TestViews(APITestCase):
+class TestFieldViews(APITestCase):
 
     def setUp(self):
         self.client = APIClient()
 
 
-    def test_fields_view(self):
+    def test_fields_get_view(self):
         response = self.client.get(reverse('garden:fields'))
 
         self.assertEqual(response.status_code, 200)
     
 
-    # def test_field_action_view(self):
-    #     response = self.client.get(reverse('garden:field-action', kwargs={'pk': 1}))
+    def test_field_edit_view(self):
+        response = self.client.put(reverse('garden:field-action', kwargs={'pk': 1}), data={'name': ' new test name', 'description': 'new test decription', 'review_frequency': 14})
 
-    #     self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
 
-    def test_topics_view(self):
+
+class TestTopicViews(APITestCase):
+
+    def setUp(self):
+        self.client = APIClient()
+
+
+    def test_topics_get_view(self):
         response = self.client.get(reverse('garden:topics', kwargs={ 'pk': 1 }))
 
         self.assertEqual(response.status_code, 200)
+

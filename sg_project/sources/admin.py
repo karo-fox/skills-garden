@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import TextSource, URLSource
+
+admin.site.register(TextSource)
+admin.site.register(URLSource)

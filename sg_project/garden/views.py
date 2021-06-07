@@ -30,15 +30,9 @@ class TopicListCreate(generics.ListCreateAPIView):
     serializer_class = TopicSerializer
 
 
-    def get_queryset(self, pk):
-        queryset = Topic.objects.filter(field__id = pk)
+    def get_queryset(self):
+        queryset = Topic.objects.filter(field__id = self.kwargs['pk'])
         return queryset
-
-
-    def list(self, request, pk):
-        queryset = self.get_queryset(pk)
-        serializer = TopicSerializer(queryset, many=True)
-        return Response(serializer.data)
 
 
 

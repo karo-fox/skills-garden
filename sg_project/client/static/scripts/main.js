@@ -2,11 +2,20 @@ const csrftoken = getCookie('csrftoken');
 const host = 'http://127.0.0.1:8000'
 
 function tab(listUrl, type, form) {
-  createList(listUrl, type);
+  console.log(`list url: ${listUrl}`);
+  if(type === "fields" || type === "topics") {
+    createList(listUrl);
+  } else if(type === "sources") {
+    createSourceList(listUrl);
+  }
   $(".tab-item").on("click", function(e) {
     $(this).addClass("is-active").siblings().removeClass("is-active");
     if(this.id === "list") {
-      createList(listUrl, type);
+      if(type === "fields" || type === "topics") {
+        createList(listUrl);
+      } else if(type === "sources") {
+        createSourceList(listUrl);
+      }
     } else if(this.id === "create") {
       createForm(form, listUrl);
     } else if(this.id === "journal") {
@@ -50,18 +59,56 @@ function actionButtons(url, backUrl, editForm) {
 }
 
 
-function createList(url, type) {
+function createList(url) {
   $.getJSON(`${host}/${url}/`, function(data) {
     objects = data.map(function(item) {
-      if(type === 'fields' || type === 'topics') {
-        return `<div class="block"><a href="${item.url}"><div class="level box"><div class="level-left">${item.name}</div><div class="left-right">${item.last_reviewed}</div></div></a></div>`;
-      } else if(type === 'sources') {
-        return `<div class="block">Source</div>`;
-      }
+      return `<div class="block"><a href="${item.url}"><div class="level box"><div class="level-left">${item.name}</div><div class="left-right">${item.last_reviewed}</div></div></a></div>`;
     });
     $('.main-section').html(objects);
   });
-};
+}
+
+
+function createSourceList(url) {
+  $('.main-section').html(`
+  <div class="buttons">
+    <button id="text" class="button is-black">Notes</button>
+    <button id="urls" class="button is-black">Links</button>
+  </div>
+  <div id="text-sources"></div>
+  <div id="url-sources"></div>
+  `);
+  getTextSources(url);
+  $('#text').click(function() {
+    $('#url-sources').html('');
+    getTextSources(url);
+  });
+  $('#urls').click(function() {
+    $('#text-sources').html('');
+    getURLSources(url);
+  });
+}
+
+
+function getTextSources(url) {
+  console.log(`url in getTextSources: ${url}`);
+  $.getJSON(`${host}/${url}/text/`, function(data) {
+    sources = data.map(function(item) {
+      return `<div class="block box"><div class="title is-4">${item.name}</div>${item.content}</div>`;
+    });
+    $('#text-sources').html(sources);
+  });
+}
+
+function getURLSources(url) {
+  console.log(`url in getURLSources: ${url}`);
+  $.getJSON(`${host}/${url}/url/`, function(data) {
+    sources = data.map(function(item) {
+      return `<div class="block box"><div class="title is-4">${item.name}</div><a href="${item.content}">${item.content}</a></div>`;
+    });
+    $('#url-sources').html(sources);
+  });
+}
 
 
 function createForm(content, url) {

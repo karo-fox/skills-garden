@@ -63,7 +63,7 @@
         </form>`;
   let id = "{{ object.pk }}";
   let field_id = "{{ field_pk }}";
-  tab(`garden/${field_id}/${id}`, 'sources', form);
+  tab(`sources/${id}`, 'sources', form);
   actionButtons(`garden/${field_id}/${id}`, `${field_id}`, editForm);
 </script>
 {% endblock %}

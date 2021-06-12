@@ -22,10 +22,6 @@ function tab(listUrl, type, form) {
       } else if(type === "sources") {
         createSourceForm(form, listUrl);
       }
-    } else if(this.id === "journal") {
-      $('.main-section').html('<p>Journal</p>');
-    } else {
-      console.log("none");
     }
   });
 }
@@ -133,7 +129,7 @@ function getURLSources(url) {
             <button class="button is-danger urlDelete">Delete</button>
           </div>
         </div>
-        <a href="${item.content}">${item.content}</a>
+        <a href="${item.content}" target="_blank" rel="noopener noreferrer">${item.content}</a>
       </div>`;
     });
     $('#url-sources').html(sources);

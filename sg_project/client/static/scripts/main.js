@@ -17,7 +17,11 @@ function tab(listUrl, type, form) {
         createSourceList(listUrl);
       }
     } else if(this.id === "create") {
-      createForm(form, listUrl);
+      if(type === "fields" || type === "topics") {
+        createForm(form, listUrl, '.main-section');
+      } else if(type === "sources") {
+        createSourceForm(form, listUrl);
+      }
     } else if(this.id === "journal") {
       $('.main-section').html('<p>Journal</p>');
     } else {
@@ -94,9 +98,25 @@ function getTextSources(url) {
   console.log(`url in getTextSources: ${url}`);
   $.getJSON(`${host}/${url}/text/`, function(data) {
     sources = data.map(function(item) {
-      return `<div class="block box"><div class="title is-4">${item.name}</div>${item.content}</div>`;
+      return `
+      <div class="block box">
+        <div class="level">
+          <div class="title is-4 level-left">${item.name}</div>
+          <div class="buttons level-right">
+            <button class="button is-link textEdit">Edit</button>
+            <button class="button is-danger textDelete">Delete</button>
+          </div>
+        </div>
+        <p>${item.content}</p>
+      </div>`;
     });
     $('#text-sources').html(sources);
+    $('.textEdit').click(function() {
+      console.log('text edit was clicked');
+    });
+    $('.textDelete').click(function() {
+      console.log('text delete was clicked');
+    });
   });
 }
 
@@ -104,16 +124,32 @@ function getURLSources(url) {
   console.log(`url in getURLSources: ${url}`);
   $.getJSON(`${host}/${url}/url/`, function(data) {
     sources = data.map(function(item) {
-      return `<div class="block box"><div class="title is-4">${item.name}</div><a href="${item.content}">${item.content}</a></div>`;
+      return `
+      <div class="block box">
+        <div class="level">
+          <div class="title is-4 level-left">${item.name}</div>
+          <div class="buttons level-right">
+            <button class="button is-link urlEdit">Edit</button>
+            <button class="button is-danger urlDelete">Delete</button>
+          </div>
+        </div>
+        <a href="${item.content}">${item.content}</a>
+      </div>`;
     });
     $('#url-sources').html(sources);
+    $('.urlEdit').click(function() {
+      console.log('url edit was clicked');
+    });
+    $('.urlDelete').click(function() {
+      console.log('url delete was clicked');
+    });
   });
 }
 
 
-function createForm(content, url) {
+function createForm(content, url, where) {
   let form = `<form id="createForm" method="POST">${content}<input type="submit" value="submit" class="button is-black"></form>`;
-  $('.main-section').html(form);
+  $(where).html(form);
   $('#createForm').submit(function(e) {
     e.preventDefault();
     let form = $(this);
@@ -129,6 +165,27 @@ function createForm(content, url) {
     });
   });
   
+}
+
+
+function createSourceForm(content, url) {
+  $('.main-section').html(`
+  <div class="buttons">
+    <button id="create-text" class="button is-black">New note</button>
+    <button id="create-urls" class="button is-black">New link</button>
+  </div>
+  <div id="text-form"></div>
+  <div id="url-form"></div>
+  `);
+  createForm(content[0], `${url}/text`, '#text-form');
+  $('#create-text').click(function() {
+    $('#url-form').html('');
+    createForm(content[0], `${url}/text`, '#text-form');
+  });
+  $('#create-urls').click(function() {
+    $('#text-form').html('');
+    createForm(content[1], `${url}/url`, '#url-form');
+  });
 }
 
 

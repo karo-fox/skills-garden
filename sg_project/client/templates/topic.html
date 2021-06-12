@@ -34,8 +34,20 @@
 <script src="{% static 'scripts/main.js' %}"></script>
 <script>
   let token = '{% csrf_token %}'
-  let form = `{% csrf_token %}
-  {% for field in create_form %}
+  let TextSourceForm = `{% csrf_token %}
+  {% for field in create_note_form %}
+  <div class="field">
+    <label class="label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+    <div class="control">
+      <input id="{{ field.id_for_label }}" name="{{ field.name }}" class="input" type="{{ field.widget_type }}" required="">
+    </div>
+    {% if field.help_text %}
+    <p class="help">{{ field.help_text }}</p>
+    {% endif %}
+  </div>
+  {% endfor %}`
+  let URLSourceForm = `{% csrf_token %}
+  {% for field in create_link_form %}
   <div class="field">
     <label class="label" for="{{ field.id_for_label }}">{{ field.label }}</label>
     <div class="control">
@@ -63,7 +75,7 @@
         </form>`;
   let id = "{{ object.pk }}";
   let field_id = "{{ field_pk }}";
-  tab(`sources/${id}`, 'sources', form);
+  tab(`sources/${id}`, 'sources', [TextSourceForm, URLSourceForm]);
   actionButtons(`garden/${field_id}/${id}`, `${field_id}`, editForm);
 </script>
 {% endblock %}

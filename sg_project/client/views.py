@@ -3,6 +3,7 @@ from django.views import generic
 
 from garden.models import Field, Topic
 from garden.forms import FieldForm, TopicForm
+from sources.forms import TextSourceForm, URLSourceForm
 
 
 
@@ -42,4 +43,6 @@ class TopicView(generic.DetailView):
         context['title'] = "Topic"
         context['field_pk'] = self.kwargs['field_pk']
         context['edit_form'] = TopicForm
+        context['create_note_form'] = TextSourceForm
+        context['create_link_form'] = URLSourceForm
         return context

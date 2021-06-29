@@ -2,7 +2,6 @@ const csrftoken = getCookie('csrftoken');
 const host = 'http://127.0.0.1:8000'
 
 function tab(listUrl, type, form) {
-  console.log(`list url: ${listUrl}`);
   if(type === "fields" || type === "topics") {
     createList(listUrl);
   } else if(type === "sources") {
@@ -91,16 +90,15 @@ function createSourceList(url) {
 
 
 function getTextSources(url) {
-  console.log(`url in getTextSources: ${url}`);
   $.getJSON(`${host}/${url}/text/`, function(data) {
-    sources = data.map(function(item) {
+    sources = data.map(function(item, i) {
       return `
       <div class="block box">
         <div class="level">
           <div class="title is-4 level-left">${item.name}</div>
           <div class="buttons level-right">
-            <button class="button is-link textEdit">Edit</button>
-            <button class="button is-danger textDelete">Delete</button>
+            <button id="edit-source-${i}" class="button is-link textEdit">Edit</button>
+            <button id="delete-source-${i}" class="button is-danger textDelete">Delete</button>
           </div>
         </div>
         <p>${item.content}</p>
@@ -108,9 +106,12 @@ function getTextSources(url) {
     });
     $('#text-sources').html(sources);
     $('.textEdit').click(function() {
-      console.log('text edit was clicked');
+      let id_attr = $(this).attr("id");
+      let id = id_attr.match(/\d+/);
+      console.log(`text edit was clicked with id: ${id}`);
     });
     $('.textDelete').click(function() {
+      let id = $(this).attr("id");
       console.log('text delete was clicked');
     });
   });
@@ -134,9 +135,11 @@ function getURLSources(url) {
     });
     $('#url-sources').html(sources);
     $('.urlEdit').click(function() {
+      let id = $(this).attr("id");
       console.log('url edit was clicked');
     });
     $('.urlDelete').click(function() {
+      let id = $(this).attr("id");
       console.log('url delete was clicked');
     });
   });

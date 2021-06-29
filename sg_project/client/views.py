@@ -46,3 +46,4 @@ class TopicView(generic.DetailView):
         context['create_note_form'] = TextSourceForm
         context['create_link_form'] = URLSourceForm
         return context
+ 

@@ -5,7 +5,7 @@ function tab(listUrl, type, form) {
   if(type === "fields" || type === "topics") {
     createList(listUrl);
   } else if(type === "sources") {
-    createSourceList(listUrl);
+    createSourceList(listUrl, form);
   }
   $(".tab-item").on("click", function(e) {
     $(this).addClass("is-active").siblings().removeClass("is-active");
@@ -13,7 +13,7 @@ function tab(listUrl, type, form) {
       if(type === "fields" || type === "topics") {
         createList(listUrl);
       } else if(type === "sources") {
-        createSourceList(listUrl);
+        createSourceList(listUrl, form);
       }
     } else if(this.id === "create") {
       if(type === "fields" || type === "topics") {
@@ -53,7 +53,7 @@ function actionButtons(url, backUrl, editForm) {
     });
     $('.modal-background').on('click', function() {
       $('.modal').removeClass("is-active");
-    })
+    });
   });
 }
 
@@ -68,7 +68,7 @@ function createList(url) {
 }
 
 
-function createSourceList(url) {
+function createSourceList(url, form) {
   $('.main-section').html(`
   <div class="buttons">
     <button id="text" class="button is-black">Notes</button>
@@ -77,19 +77,19 @@ function createSourceList(url) {
   <div id="text-sources"></div>
   <div id="url-sources"></div>
   `);
-  getTextSources(url);
+  getTextSources(url, form[0]);
   $('#text').click(function() {
     $('#url-sources').html('');
-    getTextSources(url);
+    getTextSources(url, form[0]);
   });
   $('#urls').click(function() {
     $('#text-sources').html('');
-    getURLSources(url);
+    getURLSources(url, form[1]);
   });
 }
 
 
-function getTextSources(url) {
+function getTextSources(url, form) {
   $.getJSON(`${host}/${url}/text/`, function(data) {
     sources = data.map(function(item) {
       return `
@@ -108,17 +108,40 @@ function getTextSources(url) {
     $('.textEdit').click(function() {
       let id_attr = $(this).attr("id");
       let id = id_attr.match(/\d+/);
-      console.log(`text edit was clicked with id: ${id}`);
+      $('.modal').addClass("is-active");
+      $('#editFormBlock').html(`<form id="editForm" method="UPDATE">${form}<input type="submit" value="submit" class="button is-black"></form>`);
+      $('#editForm').submit(function(e) {
+        e.preventDefault();
+        let form = $(this);
+        $.ajax({
+          url: `${host}/sources/${id}/text/action/`,
+          method: "PUT",
+          headers: {'X-CSRFToken': csrftoken},
+          data: form.serialize(),
+        }).done(function() {
+          createSourceList(url, form);
+          $('.modal').removeClass("is-active");
+        });
+      });
+      $('.modal-background').on('click', function() {
+        $('.modal').removeClass("is-active");
+      });
     });
     $('.textDelete').click(function() {
-      let id = $(this).attr("id");
-      console.log('text delete was clicked');
+      let id_attr = $(this).attr("id");
+      let id = id_attr.match(/\d+/);
+      $.ajax({
+        url: `${host}/sources/${id}/text/action`,
+        headers: {'X-CSRFToken': csrftoken},
+        method: "DELETE"
+      }).done(function() {
+        createSourceList(url, form);
+      });
     });
   });
 }
 
-function getURLSources(url) {
-  console.log(`url in getURLSources: ${url}`);
+function getURLSources(url, form) {
   $.getJSON(`${host}/${url}/url/`, function(data) {
     sources = data.map(function(item) {
       return `
@@ -135,12 +158,37 @@ function getURLSources(url) {
     });
     $('#url-sources').html(sources);
     $('.urlEdit').click(function() {
-      let id = $(this).attr("id");
-      console.log('url edit was clicked');
+      let id_attr = $(this).attr("id");
+      let id = id_attr.match(/\d+/);
+      $('.modal').addClass("is-active");
+      $('#editFormBlock').html(`<form id="editForm" method="UPDATE">${form}<input type="submit" value="submit" class="button is-black"></form>`);
+      $('#editForm').submit(function(e) {
+        e.preventDefault();
+        let form = $(this);
+        $.ajax({
+          url: `${host}/sources/${id}/url/action/`,
+          method: "PUT",
+          headers: {'X-CSRFToken': csrftoken},
+          data: form.serialize(),
+        }).done(function() {
+          createSourceList(url, form);
+          $('.modal').removeClass("is-active");
+        });
+      });
+      $('.modal-background').on('click', function() {
+        $('.modal').removeClass("is-active");
+      });
     });
     $('.urlDelete').click(function() {
-      let id = $(this).attr("id");
-      console.log('url delete was clicked');
+      let id_attr = $(this).attr("id");
+      let id = id_attr.match(/\d+/);
+      $.ajax({
+        url: `${host}/sources/${id}/url/action`,
+        headers: {'X-CSRFToken': csrftoken},
+        method: "DELETE"
+      }).done(function() {
+        createSourceList(url, form);
+      });
     });
   });
 }

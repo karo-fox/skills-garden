@@ -47,3 +47,12 @@ class TopicView(generic.DetailView):
         context['create_link_form'] = URLSourceForm
         return context
  
+
+
+class AboutView(generic.TemplateView):
+    template_name = "about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "About"
+        return context

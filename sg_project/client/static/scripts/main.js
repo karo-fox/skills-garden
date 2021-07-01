@@ -131,7 +131,7 @@ function getTextSources(url, form) {
       let id_attr = $(this).attr("id");
       let id = id_attr.match(/\d+/);
       $.ajax({
-        url: `${host}/sources/${id}/text/action`,
+        url: `${host}/sources/${id}/text/action/`,
         headers: {'X-CSRFToken': csrftoken},
         method: "DELETE"
       }).done(function() {
@@ -183,7 +183,7 @@ function getURLSources(url, form) {
       let id_attr = $(this).attr("id");
       let id = id_attr.match(/\d+/);
       $.ajax({
-        url: `${host}/sources/${id}/url/action`,
+        url: `${host}/sources/${id}/url/action/`,
         headers: {'X-CSRFToken': csrftoken},
         method: "DELETE"
       }).done(function() {

@@ -6,7 +6,7 @@ from .serializers import TextSourceSerializer, URLSourceSerializer
 
 
 
-class TextSourceListCreateView(generics.ListCreateAPIView):
+class TextSourceListCreate(generics.ListCreateAPIView):
     serializer_class = TextSourceSerializer
     
     def get_queryset(self):
@@ -15,9 +15,27 @@ class TextSourceListCreateView(generics.ListCreateAPIView):
 
 
 
-class URLSourceListCreateView(generics.ListCreateAPIView):
+class TextSourceUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = TextSourceSerializer
+
+    def get_queryset(self):
+        queryset = TextSource.objects.filter(id = self.kwargs['pk'])
+        return queryset
+
+
+
+class URLSourceListCreate(generics.ListCreateAPIView):
     serializer_class = URLSourceSerializer
 
     def get_queryset(self):
         queryset = URLSource.objects.filter(topic__id = self.kwargs['pk'])
+        return queryset
+
+
+
+class URLSourceUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = URLSourceSerializer
+
+    def get_queryset(self):
+        queryset = URLSource.objects.filter(id = self.kwargs['pk'])
         return queryset

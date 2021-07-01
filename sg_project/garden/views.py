@@ -19,7 +19,6 @@ class FieldListCreate(generics.ListCreateAPIView):
 class FieldUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = FieldSerializer
 
-
     def get_queryset(self):
         queryset = Field.objects.filter(id = self.kwargs['pk'])
         return queryset
@@ -29,7 +28,6 @@ class FieldUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
 class TopicListCreate(generics.ListCreateAPIView):
     serializer_class = TopicSerializer
 
-
     def get_queryset(self):
         queryset = Topic.objects.filter(field__id = self.kwargs['pk'])
         return queryset
@@ -38,7 +36,6 @@ class TopicListCreate(generics.ListCreateAPIView):
 
 class TopicUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TopicSerializer
-
 
     def get_queryset(self):
         queryset = Topic.objects.filter(id = self.kwargs['pk'])

@@ -91,14 +91,14 @@ function createSourceList(url) {
 
 function getTextSources(url) {
   $.getJSON(`${host}/${url}/text/`, function(data) {
-    sources = data.map(function(item, i) {
+    sources = data.map(function(item) {
       return `
       <div class="block box">
         <div class="level">
           <div class="title is-4 level-left">${item.name}</div>
           <div class="buttons level-right">
-            <button id="edit-source-${i}" class="button is-link textEdit">Edit</button>
-            <button id="delete-source-${i}" class="button is-danger textDelete">Delete</button>
+            <button id="edit-text-source-${item.id}" class="button is-link textEdit">Edit</button>
+            <button id="delete-text-source-${item.id}" class="button is-danger textDelete">Delete</button>
           </div>
         </div>
         <p>${item.content}</p>
@@ -126,8 +126,8 @@ function getURLSources(url) {
         <div class="level">
           <div class="title is-4 level-left">${item.name}</div>
           <div class="buttons level-right">
-            <button class="button is-link urlEdit">Edit</button>
-            <button class="button is-danger urlDelete">Delete</button>
+            <button id="edit-url-source-${item.id}" class="button is-link urlEdit">Edit</button>
+            <button id="delete-url-source-${item.id}" class="button is-danger urlDelete">Delete</button>
           </div>
         </div>
         <a href="${item.content}" target="_blank" rel="noopener noreferrer">${item.content}</a>

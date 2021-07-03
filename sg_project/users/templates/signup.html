@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block main-content %}
+<section class="container">
+  <form method="post" action="{% url 'users:signup' %}">
+  {% csrf_token %}
+  <div class="field">
+    <label for="username" class="label">Username</label>
+    <div class="control">
+      <input id="username" name="username" type="text" class="input" required>
+    </div>
+    <p class="help">{{ form.username.help_text }}</p>
+    <p class="help is-danger">{{ form.username.errors }}</p>
+  </div>
+  <div class="field">
+    <label for="password1" class="label">Password</label>
+    <div class="control">
+      <input id="password1" name="password1" type="password" class="input" required>
+    </div>
+    <p class="help">{{ form.password1.help_text }}</p>
+    <p class="help is-danger">{{ form.password1.errors }}</p>
+  </div>
+  <div class="field">
+      <label for="password2" class="label">Confirm password</label>
+      <div class="control">
+        <input id="password2" name="password2" type="password" class="input" required>
+      </div>
+      <p class="help">{{ form.password2.help_text }}</p>
+      <p class="help is-danger">{{ form.password2.errors }}</p>
+    </div>
+  <input type="submit" value="Sign up" class="button is-black">
+  <input type="hidden" name="next" value="{{ next }}">
+  </form>
+</section>
+  
+{% endblock %}

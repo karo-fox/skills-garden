@@ -1,14 +1,16 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from django.contrib.auth.models import User
+
 
 class Field(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    # user = models.ForeignKey(User)
     date_added = models.DateField(auto_now_add=True)
     last_reviewed = models.DateField(auto_now=True)
     review_frequency = models.IntegerField()
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('client:field', kwargs={'pk': self.id})

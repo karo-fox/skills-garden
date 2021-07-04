@@ -15,7 +15,7 @@ class FieldListCreate(generics.ListCreateAPIView):
     serializer_class = FieldSerializer
 
     def get_queryset(self):
-        queryset = Field.objects.filter(owner = self.request.user)
+        queryset = Field.objects.filter(owner = self.request.user.id)
         return queryset
 
 

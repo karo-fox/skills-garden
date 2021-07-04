@@ -17,7 +17,7 @@ class FieldSerializer(serializers.ModelSerializer):
         print(self)
         field = Field(name=validated_data['name'], description=validated_data['description'],
                       review_frequency=validated_data['review_frequency'],
-                      owner=self.context['request'].user)
+                      owner=self.context['request'].user.id)
         field.save()
         return field
 

@@ -5,12 +5,21 @@ from .models import Field, Topic
 class FieldSerializer(serializers.ModelSerializer):
     url = serializers.CharField(source='get_absolute_url', read_only=True)
     last_reviewed = serializers.DateField(read_only=True)
+    owner = serializers.PrimaryKeyRelatedField(read_only=True)
 
 
     class Meta:
         model = Field
-        fields = ['name', 'description', 'review_frequency', 'last_reviewed', 'url']
+        fields = ['name', 'description', 'review_frequency', 'last_reviewed', 'url', 'owner']
+    
 
+    def create(self, validated_data):
+        print(self)
+        field = Field(name=validated_data['name'], description=validated_data['description'],
+                      review_frequency=validated_data['review_frequency'],
+                      owner=self.context['request'].user)
+        field.save()
+        return field
 
 
 class TopicSerializer(serializers.ModelSerializer):

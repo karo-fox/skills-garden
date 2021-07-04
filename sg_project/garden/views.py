@@ -14,6 +14,10 @@ class FieldListCreate(generics.ListCreateAPIView):
     queryset = Field.objects.all()
     serializer_class = FieldSerializer
 
+    def get_queryset(self):
+        queryset = Field.objects.filter(owner = self.request.user)
+        return queryset
+
 
 
 class FieldUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):

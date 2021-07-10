@@ -3,9 +3,7 @@ import json
 
 from django.test import TestCase, SimpleTestCase
 from django.urls import reverse, resolve
-from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from django.http import HttpRequest
 
 from rest_framework.test import APIClient, APITestCase
 

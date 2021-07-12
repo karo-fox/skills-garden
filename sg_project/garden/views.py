@@ -4,6 +4,8 @@ from django.views import generic
 
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 
 from .models import Field, Topic
 from .serializers import FieldSerializer, TopicSerializer
@@ -11,6 +13,9 @@ from .serializers import FieldSerializer, TopicSerializer
 
 
 class FieldListCreate(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [BasicAuthentication, SessionAuthentication]
+
     queryset = Field.objects.all()
     serializer_class = FieldSerializer
 

@@ -17,7 +17,6 @@ class ProfileView(generic.TemplateView):
 
 
 def signup_view(request):
-
     if request.method != "POST":
         form = UserCreationForm
     else:

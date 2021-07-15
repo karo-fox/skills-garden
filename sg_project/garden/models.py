@@ -8,12 +8,12 @@ class Field(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     date_added = models.DateField(auto_now_add=True)
-    last_reviewed = models.DateField(auto_now=True)
+    last_reviewed = models.DateField(default=None)
     review_frequency = models.IntegerField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
-        return reverse('client:field', kwargs={'pk': self.id})
+        return reverse('garden:field-detail', kwargs={'pk': self.id})
 
     def __str__(self):
         return self.name
@@ -30,10 +30,10 @@ class Topic(models.Model):
     description = models.TextField()
     field = models.ForeignKey(Field, on_delete=models.CASCADE)
     date_added = models.DateField(auto_now_add=True)
-    last_reviewed = models.DateField(auto_now=True)
+    last_reviewed = models.DateField(default=None)
 
     def get_absolute_url(self):
-        return reverse('client:topic', kwargs={'field_pk': self.field.id, 'pk': self.id})
+        return reverse('garden:topic-detail', kwargs={'field_pk': self.field.id, 'pk': self.id})
 
     def __str__(self):
         return self.name

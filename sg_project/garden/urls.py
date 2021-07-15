@@ -1,11 +1,18 @@
-from django.urls import path
+from django.urls import path, include
 
-from .views import FieldListCreate, TopicListCreate, FieldUpdateDestroy, TopicUpdateDestroy
+from rest_framework import routers
+from rest_framework_nested import routers as nested_routers
+
+from .views import FieldViewSet, TopicViewset
+
+router = routers.SimpleRouter()
+router.register(r'fields', FieldViewSet, basename='field')
+
+fields_router = nested_routers.NestedSimpleRouter(router, r'fields', lookup='field')
+fields_router.register(r'topics', TopicViewset, basename='topic')
 
 app_name = 'garden'
 urlpatterns = [
-    path('fields/', FieldListCreate.as_view(), name='fields'),
-    path('<int:pk>/action/', FieldUpdateDestroy.as_view(), name='field-action'),
-    path('<int:pk>/', TopicListCreate.as_view(), name='topics'),
-    path('<int:field_pk>/<int:pk>/action/', TopicUpdateDestroy.as_view(), name='topic-action')
+    path('', include(router.urls)),
+    path('', include(fields_router.urls)),
 ]

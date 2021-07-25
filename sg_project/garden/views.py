@@ -18,5 +18,4 @@ class TopicViewset(viewsets.ModelViewSet):
     serializer_class = TopicSerializer
 
     def get_queryset(self):
-        print(self.request)
         return Topic.objects.filter(field=self.kwargs['field_pk'])

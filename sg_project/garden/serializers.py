@@ -34,6 +34,6 @@ class TopicSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         topic = Topic(name=validated_data['name'], description=validated_data['description'],
-                      field=Field.objects.get(id=self.context['view'].kwargs['pk']))
+                      field=Field.objects.get(id=self.context['view'].kwargs['field_pk']))
         topic.save()
         return topic

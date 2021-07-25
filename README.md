@@ -6,5 +6,3 @@ Work in progress
 - python
 - Django
 - Django REST framework  
-- a little bit of HTML & JavaScript for front-end
-- Bulma CSS

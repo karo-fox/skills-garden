@@ -15,7 +15,7 @@ class TextSourceSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         source = TextSource(name=validated_data['name'], content=validated_data['content'],
-                            topic=Topic.objects.get(id=self.context['view'].kwargs['pk']))
+                            topic=Topic.objects.get(id=self.context['view'].kwargs['topic_pk']))
         source.save()
         return source
     
@@ -32,6 +32,6 @@ class URLSourceSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         source = URLSource(name=validated_data['name'], content=validated_data['content'],
-                            topic=Topic.objects.get(id=self.context['view'].kwargs['pk']))
+                            topic=Topic.objects.get(id=self.context['view'].kwargs['topic_pk']))
         source.save()
         return source

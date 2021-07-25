@@ -6,33 +6,33 @@ from django.contrib.auth.models import User
 
 from rest_framework.test import APITestCase, APIClient
 
-from .views import TextSourceListCreate, URLSourceListCreate, TextSourceUpdateDestroy, URLSourceUpdateDestroy
+from .views import TextSourceViewSet, URLSourceViewSet
 from .models import TextSource, URLSource
 
 from garden.models import Field, Topic
 
 
-class TestUrls(APITestCase):
+# class TestUrls(APITestCase):
 
-    def setUp(self):
-        self.client = APIClient()
+#     def setUp(self):
+#         self.client = APIClient()
 
 
-    def test_text_list_url_resolves(self):
-        url = reverse('sources:text-list', kwargs={'pk': 1})
-        self.assertEqual(resolve(url).func.view_class, TextSourceListCreate)
+#     def test_text_list_url_resolves(self):
+#         url = reverse('sources:text-source-list', kwargs={'pk': 1})
+#         self.assertEqual(resolve(url).func.view_class, TextSourceListCreate)
 
-    def test_url_list_url_resolves(self):
-        url = reverse('sources:url-list', kwargs={'pk':1})
-        self.assertEqual(resolve(url).func.view_class, URLSourceListCreate)
+#     def test_url_list_url_resolves(self):
+#         url = reverse('sources:url-list', kwargs={'pk':1})
+#         self.assertEqual(resolve(url).func.view_class, URLSourceListCreate)
     
-    def test_text_action_url_resolves(self):
-        url = reverse('sources:text-action', kwargs={'pk':1})
-        self.assertEqual(resolve(url).func.view_class, TextSourceUpdateDestroy)
+#     def test_text_action_url_resolves(self):
+#         url = reverse('sources:text-action', kwargs={'pk':1})
+#         self.assertEqual(resolve(url).func.view_class, TextSourceUpdateDestroy)
     
-    def test_url_action_url_resolves(self):
-        url = reverse('sources:url-action', kwargs={'pk':1})
-        self.assertEqual(resolve(url).func.view_class, URLSourceUpdateDestroy)
+#     def test_url_action_url_resolves(self):
+#         url = reverse('sources:url-action', kwargs={'pk':1})
+#         self.assertEqual(resolve(url).func.view_class, URLSourceUpdateDestroy)
     
 
 class TestViews(APITestCase):
@@ -68,7 +68,7 @@ class TestViews(APITestCase):
 
 
     def test_text_source_get(self):
-        response = self.client.get(reverse('sources:text-list', kwargs={'pk':1}))
+        response = self.client.get(reverse('sources:text-source-list', kwargs={'topic_pk':1}))
 
         self.assertEqual(response.status_code, 200)
     
@@ -78,7 +78,7 @@ class TestViews(APITestCase):
             'name': 'test text source',
             'content': 'test text source content'   
         }
-        response = self.client.post(reverse('sources:text-list', kwargs={'pk': 1}), data)
+        response = self.client.post(reverse('sources:text-source-list', kwargs={'topic_pk': 1}), data)
 
         self.assertEqual(response.status_code, 201)
     
@@ -88,19 +88,19 @@ class TestViews(APITestCase):
             'name': 'updated text source',
             'content': 'updated text source content'
         }
-        response = self.client.put(reverse('sources:text-action', kwargs={'pk':1}), data)
+        response = self.client.put(reverse('sources:text-source-detail', kwargs={'topic_pk': 1, 'pk': 1}), data)
 
         self.assertEqual(response.status_code, 200)
     
 
     def test_text_source_delete(self):
-        response = self.client.delete(reverse('sources:text-action', kwargs={'pk':1}))
+        response = self.client.delete(reverse('sources:text-source-detail', kwargs={'topic_pk': 1, 'pk': 1}))
 
         self.assertEqual(response.status_code, 204)
     
 
     def test_url_source_get(self):
-        response = self.client.get(reverse('sources:url-list', kwargs={'pk':1}))
+        response = self.client.get(reverse('sources:url-source-list', kwargs={'topic_pk':1}))
 
         self.assertEqual(response.status_code, 200)
     
@@ -110,7 +110,7 @@ class TestViews(APITestCase):
             'name': 'test url source',
             'content': 'https://www.google.com/'   
         }
-        response = self.client.post(reverse('sources:url-list', kwargs={'pk': 1}), data)
+        response = self.client.post(reverse('sources:url-source-list', kwargs={'topic_pk': 1}), data)
 
         self.assertEqual(response.status_code, 201)
     
@@ -120,13 +120,13 @@ class TestViews(APITestCase):
             'name': 'updated url source',
             'content': 'https://www.google.com/'
         }
-        response = self.client.put(reverse('sources:url-action', kwargs={'pk':2}), data)
+        response = self.client.put(reverse('sources:url-source-detail', kwargs={'topic_pk': 1, 'pk': 2}), data)
 
         self.assertEqual(response.status_code, 200)
     
 
     def test_url_source_delete(self):
-        response = self.client.delete(reverse('sources:url-action', kwargs={'pk':2}))
+        response = self.client.delete(reverse('sources:url-source-detail', kwargs={'topic_pk': 1, 'pk': 2}))
 
         self.assertEqual(response.status_code, 204)
 

@@ -1,7 +1,7 @@
 from rest_framework import viewsets
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import BasicAuthentication, SessionAuthentication
+# from rest_framework.response import Response
+# from rest_framework.permissions import IsAuthenticated
+# from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 
 from .models import Field, Topic
 from .serializers import FieldSerializer, TopicSerializer

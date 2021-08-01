@@ -9,3 +9,7 @@ class RevisionViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Revision.objects.filter(field__owner=self.request.user)
+
+
+class TestMixin():
+    name = 'test'

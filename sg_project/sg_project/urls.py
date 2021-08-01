@@ -22,5 +22,6 @@ urlpatterns = [
     path('users/', include('users.urls', namespace="users")),
     path('garden/', include('garden.urls', namespace="garden")),
     path('sources/', include('sources.urls', namespace="sources")),
-    path('schedule/', include('schedule.urls', namespace="revisions")),
+    path('schedule/', include('schedule.urls', namespace="schedule")),
+    path('journal/', include('journal.urls', namespace="journal")),
 ]

@@ -1,5 +1,7 @@
 from rest_framework import viewsets
 
+from schedule.views import RevisionMixin
+
 from .models import Field, Topic
 from .serializers import FieldSerializer, TopicSerializer
 
@@ -11,7 +13,7 @@ class FieldViewSet(viewsets.ModelViewSet):
         return Field.objects.filter(owner=self.request.user)
     
 
-class TopicViewset(viewsets.ModelViewSet):
+class TopicViewset(RevisionMixin, viewsets.ModelViewSet):
     serializer_class = TopicSerializer
 
     def get_queryset(self):

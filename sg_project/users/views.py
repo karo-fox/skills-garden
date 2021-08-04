@@ -5,14 +5,14 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 
 
-class ProfileView(generic.TemplateView):
-    template_name = 'profile.html'
+# class ProfileView(generic.TemplateView):
+#     template_name = 'profile.html'
 
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Profile'
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['title'] = 'Profile'
+#         return context
 
 
 

@@ -13,7 +13,7 @@ class FieldViewSet(viewsets.ModelViewSet):
         return Field.objects.filter(owner=self.request.user)
     
 
-class TopicViewset(RevisionMixin, viewsets.ModelViewSet):
+class TopicViewSet(RevisionMixin, viewsets.ModelViewSet):
     serializer_class = TopicSerializer
 
     def get_queryset(self):

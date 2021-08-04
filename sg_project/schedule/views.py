@@ -41,5 +41,5 @@ class RevisionMixin(object):
         return date
     
     def create_revision(self, date, field):
-        revision = Revision(date=date, field=field)
+        revision = Revision.objects.create(date=date, field=field)
         revision.save()

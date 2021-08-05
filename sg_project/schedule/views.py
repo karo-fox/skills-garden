@@ -39,10 +39,8 @@ class RevisionMixin(object):
         revision = Revision.objects.create(date=date, field=field)
         revision.save()
         return revision
-    
+
     def get_revision_date(self, field):
         interval = datetime.timedelta(days=field.review_frequency)
         date = datetime.date.today() + interval
         return date
-    
-    

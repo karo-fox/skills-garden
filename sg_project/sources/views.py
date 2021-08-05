@@ -10,11 +10,11 @@ class TextSourceViewSet(viewsets.ModelViewSet):
     serializer_class = TextSourceSerializer
 
     def get_queryset(self):
-        return TextSource.objects.filter(topic__id = self.kwargs['topic_pk'])
+        return TextSource.objects.filter(topic__id=self.kwargs['topic_pk'])
 
 
 class URLSourceViewSet(viewsets.ModelViewSet):
     serializer_class = URLSourceSerializer
 
     def get_queryset(self):
-        return URLSource.objects.filter(topic__id = self.kwargs['topic_pk'])
+        return URLSource.objects.filter(topic__id=self.kwargs['topic_pk'])

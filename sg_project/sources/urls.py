@@ -5,8 +5,10 @@ from rest_framework import routers
 from .views import TextSourceViewSet, URLSourceViewSet
 
 router = routers.SimpleRouter()
-router.register(r'(?P<topic_pk>[^/.]+)/text', TextSourceViewSet, basename='text-source')
-router.register(r'(?P<topic_pk>[^/.]+)/url', URLSourceViewSet, basename='url-source')
+router.register(r'(?P<topic_pk>[^/.]+)/text',
+                TextSourceViewSet, basename='text-source')
+router.register(r'(?P<topic_pk>[^/.]+)/url',
+                URLSourceViewSet, basename='url-source')
 
 app_name = 'sources'
 urlpatterns = [

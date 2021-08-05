@@ -15,7 +15,8 @@ from .views import RevisionViewSet
 class TestModel(TestCase):
 
     def setUp(self):
-        self.test_user = User.objects.get_or_create(username='TestUser', password='K0n7073$7')[0]
+        self.test_user = User.objects.get_or_create(
+            username='TestUser', password='K0n7073$7')[0]
         self.test_user.save()
         date_added = datetime.date(2021, 4, 1)
         last_reviewed = datetime.date(2021, 5, 18)
@@ -39,11 +40,9 @@ class TestModel(TestCase):
         )
         self.false_rev.save()
 
-    
     def test_is_active(self):
         self.assertEqual(self.true_rev.is_active(), True)
         self.assertEqual(self.false_rev.is_active(), False)
-    
 
     def tearDown(self):
         self.test_user.delete()
@@ -56,7 +55,8 @@ class TestRevisionViews(APITestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.test_user = User.objects.get_or_create(username='TestUser', password='K0n7073$7')[0]
+        self.test_user = User.objects.get_or_create(
+            username='TestUser', password='K0n7073$7')[0]
         self.test_user.save()
         self.client.force_authenticate(user=self.test_user)
         self.field = Field.objects.create(
@@ -73,13 +73,12 @@ class TestRevisionViews(APITestCase):
             field=self.field
         )
         self.rev.save()
-    
 
     def test_revision_get_view(self):
         response = self.client.get(reverse('schedule:revision-list'))
 
         self.assertEqual(response.status_code, 200)
-    
+
     def test_revision_post_view(self):
         data = {
             'date': datetime.date(2021, 8, 1),
@@ -94,15 +93,16 @@ class TestRevisionViews(APITestCase):
             'date': datetime.date(2021, 9, 12),
             'field': self.field.pk
         }
-        response = self.client.put(reverse('schedule:revision-detail', kwargs={'pk': 1}), data)
+        response = self.client.put(
+            reverse('schedule:revision-detail', kwargs={'pk': 1}), data)
 
         self.assertEqual(response.status_code, 200)
-    
+
     def test_revision_delete_view(self):
-        response = self.client.delete(reverse('schedule:revision-detail', kwargs={'pk': 1}))
+        response = self.client.delete(
+            reverse('schedule:revision-detail', kwargs={'pk': 1}))
 
         self.assertEqual(response.status_code, 204)
-    
 
     def tearDown(self):
         self.test_user.delete()
@@ -110,12 +110,12 @@ class TestRevisionViews(APITestCase):
         self.rev.delete()
 
 
-
 class TestRevisionMixin(TestCase):
-    
+
     def setUp(self):
         self.client = APIClient()
-        self.test_user = User.objects.get_or_create(username='TestUser', password='K0n7073$7')[0]
+        self.test_user = User.objects.get_or_create(
+            username='TestUser', password='K0n7073$7')[0]
         self.test_user.save()
         self.client.force_authenticate(user=self.test_user)
         self.field = Field.objects.create(
@@ -131,24 +131,26 @@ class TestRevisionMixin(TestCase):
             field=self.field
         )
         self.topic.save()
-    
 
     def test_revise_action(self):
-        response = self.client.post(reverse('garden:topic-revise', kwargs={'field_pk': 1, 'pk': 1}))
+        response = self.client.post(
+            reverse('garden:topic-revise', kwargs={'field_pk': 1, 'pk': 1}))
 
         self.assertEqual(response.status_code, 200)
-    
+
     def test_revise_creates_revision(self):
-        initial_revisions = self.client.get(reverse('schedule:revision-list')).data
-        self.client.post(reverse('garden:topic-revise', kwargs={'field_pk': 1, 'pk': 1}))
+        initial_revisions = self.client.get(
+            reverse('schedule:revision-list')).data
+        self.client.post(reverse('garden:topic-revise',
+                         kwargs={'field_pk': 1, 'pk': 1}))
         revisions = self.client.get(reverse('schedule:revision-list')).data
 
-        revision_date = datetime.date.today() + datetime.timedelta(days=self.field.review_frequency)
+        revision_date = datetime.date.today(
+        ) + datetime.timedelta(days=self.field.review_frequency)
 
         self.assertEqual(len(revisions), len(initial_revisions) + 1)
         self.assertEqual(revisions[-1]['field'], self.field.pk)
         self.assertEqual(revisions[-1]['date'], revision_date.isoformat())
-
 
     def tearDown(self):
         self.test_user.delete()

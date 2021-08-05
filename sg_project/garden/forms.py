@@ -11,7 +11,6 @@ class FieldForm(forms.ModelForm):
         fields = ['name', 'description', 'review_frequency']
 
 
-
 class TopicForm(forms.ModelForm):
 
     class Meta:

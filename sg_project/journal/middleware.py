@@ -39,5 +39,8 @@ class JournalMiddleware:
         entry.save()
     
     def process_view(self, request, view_func, view_args, view_kwargs):
-        self.view_name = str(view_func.__name__)
+        if 'revise' in request.path:
+            self.view_name = 'RevisionViewSet'
+        else:
+            self.view_name = str(view_func.__name__)
         return None

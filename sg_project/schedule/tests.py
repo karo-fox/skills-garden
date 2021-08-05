@@ -134,13 +134,13 @@ class TestRevisionMixin(TestCase):
     
 
     def test_revise_action(self):
-        response = self.client.get(reverse('garden:topic-revise', kwargs={'field_pk': 1, 'pk': 1}))
+        response = self.client.post(reverse('garden:topic-revise', kwargs={'field_pk': 1, 'pk': 1}))
 
         self.assertEqual(response.status_code, 200)
     
     def test_revise_creates_revision(self):
         initial_revisions = self.client.get(reverse('schedule:revision-list')).data
-        self.client.get(reverse('garden:topic-revise', kwargs={'field_pk': 1, 'pk': 1}))
+        self.client.post(reverse('garden:topic-revise', kwargs={'field_pk': 1, 'pk': 1}))
         revisions = self.client.get(reverse('schedule:revision-list')).data
 
         revision_date = datetime.date.today() + datetime.timedelta(days=self.field.review_frequency)

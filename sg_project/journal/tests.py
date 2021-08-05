@@ -110,7 +110,7 @@ class TestMiddleware(TestCase):
 
     def test_create_entry_on_topic_revise(self):
         initial_entries = self.client.get(reverse('journal:entry-list')).data
-        self.client.get(reverse('garden:topic-revise', kwargs={'field_pk': 1, 'pk': 1}))
+        self.client.post(reverse('garden:topic-revise', kwargs={'field_pk': 1, 'pk': 1}))
         entries = self.client.get(reverse('journal:entry-list')).data
 
         self.assertEqual(len(entries), len(initial_entries) + 1)

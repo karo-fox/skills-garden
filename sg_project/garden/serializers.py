@@ -10,7 +10,7 @@ class FieldSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Field
-        fields = ['name', 'description', 'review_frequency', 'last_reviewed', 'url', 'owner']
+        fields = '__all__'
     
 
     def create(self, validated_data):
@@ -29,7 +29,7 @@ class TopicSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Topic
-        fields = ['name', 'description', 'field', 'last_reviewed', 'url']
+        fields = '__all__'
     
 
     def create(self, validated_data):

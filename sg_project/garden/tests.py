@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from rest_framework.test import APIClient, APITestCase
 
 from .models import Field, Topic
-from .views import FieldViewSet, TopicViewset
+from .views import FieldViewSet, TopicViewSet
 
 
 
@@ -64,37 +64,7 @@ class TestModels(TestCase):
 
 
 
-# class TestUrls(APITestCase):
-
-#     def setUp(self):
-#         client = APIClient()
-#         self.test_user = User.objects.get_or_create(username='TestUser', password='K0n7073$7')[0]
-#         self.test_user.save()
-    
-
-#     def test_field_list_url_resolves(self):
-#         url = reverse('garden:field-list')
-#         self.assertEqual(resolve(url).func.view_class, FieldViewSet)
-
-#     def test_field_detail_url_resolves(self):
-#         url = reverse('garden:field-detail', kwargs={'pk': 1})
-#         self.assertEqual(resolve(url).func.view_class, FieldUpdateDestroy)
-
-#     def test_topic_list_url_resolves(self):
-#         url = reverse('garden:topic-list', kwargs={'pk': 1})
-#         self.assertEqual(resolve(url).func.view_class, TopicListCreate)
-
-#     def test_topic_detail_url_resolves(self):
-#         url = reverse('garden:topic-detail', kwargs={'pk': 1, 'field_pk' : 1})
-#         self.assertEqual(resolve(url).func.view_class, TopicUpdateDestroy)
-    
-
-#     def tearDown(self):
-#         self.test_user.delete()
-
-
-
-class TestFieldViews(APITestCase):
+class TestViews(APITestCase):
 
     def setUp(self):
         self.client = APIClient()
@@ -187,7 +157,7 @@ class TestFieldViews(APITestCase):
     def test_topics_delete_view(self):
         response = self.client.delete(reverse('garden:topic-detail', kwargs={'pk': 1, 'field_pk': 1}))
 
-        self.assertEqual(response.status_code, 204)    
+        self.assertEqual(response.status_code, 204)   
 
 
     def tearDown(self):

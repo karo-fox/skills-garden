@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 from rest_framework.test import APIClient, APITestCase
 
-from garden.models import Field
+from garden.models import Field, Topic
 
 from .models import Revision
 from .views import RevisionViewSet
@@ -108,3 +108,49 @@ class TestRevisionViews(APITestCase):
         self.test_user.delete()
         self.field.delete()
         self.rev.delete()
+
+
+
+class TestRevisionMixin(TestCase):
+    
+    def setUp(self):
+        self.client = APIClient()
+        self.test_user = User.objects.get_or_create(username='TestUser', password='K0n7073$7')[0]
+        self.test_user.save()
+        self.client.force_authenticate(user=self.test_user)
+        self.field = Field.objects.create(
+            name='test field',
+            description='test field description',
+            review_frequency=3,
+            owner=self.test_user,
+        )
+        self.field.save()
+        self.topic = Topic.objects.create(
+            name='test topic',
+            description='test topic description',
+            field=self.field
+        )
+        self.topic.save()
+    
+
+    def test_revise_action(self):
+        response = self.client.get(reverse('garden:topic-revise', kwargs={'field_pk': 1, 'pk': 1}))
+
+        self.assertEqual(response.status_code, 200)
+    
+    def test_revise_creates_revision(self):
+        initial_revisions = self.client.get(reverse('schedule:revision-list')).data
+        self.client.get(reverse('garden:topic-revise', kwargs={'field_pk': 1, 'pk': 1}))
+        revisions = self.client.get(reverse('schedule:revision-list')).data
+
+        revision_date = datetime.date.today() + datetime.timedelta(days=self.field.review_frequency)
+
+        self.assertEqual(len(revisions), len(initial_revisions) + 1)
+        self.assertEqual(revisions[-1]['field'], self.field.pk)
+        self.assertEqual(revisions[-1]['date'], revision_date.isoformat())
+
+
+    def tearDown(self):
+        self.test_user.delete()
+        self.field.delete()
+        self.topic.delete()

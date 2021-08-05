@@ -6,3 +6,6 @@ class Entry(models.Model):
     text = models.TextField(max_length=500)
     by_system = models.BooleanField(default=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = 'entries'

@@ -1,3 +1,5 @@
+import re
+
 from django.contrib.auth import get_user
 
 from .models import Entry
@@ -22,6 +24,7 @@ class JournalMiddleware:
             'TextSourceViewSet': 'Text Source',
             'URLSourceViewSet': 'URL Source',
         }
+        self.object_name = None
 
     def __call__(self, request):
         response = self.get_response(request)
@@ -41,8 +44,9 @@ class JournalMiddleware:
         return message
 
     def process_view(self, request, view_func, view_args, view_kwargs):
-        if 'revise' in request.path:
-            self.view_name = 'RevisionViewSet'
-        else:
-            self.view_name = str(view_func.__name__)
+        if request.method in self.entry_templates.keys():
+            if 'revise' in request.path:
+                self.view_name = 'RevisionViewSet'
+            else:
+                self.view_name = str(view_func.__name__)
         return None

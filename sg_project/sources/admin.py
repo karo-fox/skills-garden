@@ -1,6 +1,14 @@
 from django.contrib import admin
 
-from .models import TextSource, URLSource
+from garden.admin import TopicLinksMixin
 
-admin.site.register(TextSource)
-admin.site.register(URLSource)
+from .models import TextSource, URLSource, Source
+
+
+@admin.register(Source)
+class SourceAdmin(TopicLinksMixin, admin.ModelAdmin):
+    list_display = ('name', 'topic_detail')
+    list_filter = ('topic', 'topic__field')
+
+    def get_topic(self, obj):
+        return obj.topic

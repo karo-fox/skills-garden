@@ -8,7 +8,7 @@ from rest_framework.test import APIClient, APITestCase
 
 from .models import Field, Topic
 from .views import FieldViewSet, TopicViewSet
-from .admin import GardenLinksMixin
+from .admin import FieldLinksMixin, TopicLinksMixin
 
 
 class TestModels(TestCase):
@@ -183,9 +183,9 @@ class TestAdmin(TestCase):
         self.field.save()
         self.topic.save()
 
-    def test_garden_links_mixin(self):
-        mixin = GardenLinksMixin()
-        mixin.get_field = self.get_field
+    def test_field_links_mixin(self):
+        mixin = FieldLinksMixin()
+        mixin.get_field = self.get_object
         topic_list_link = mixin.topic_list(self.field)
         field_detail_link = mixin.field_detail(self.field)
 
@@ -194,7 +194,15 @@ class TestAdmin(TestCase):
         self.assertEqual(
             field_detail_link, '<a href="/admin/garden/field/1/change/">Test field</a>')
 
-    def get_field(self, obj):
+    def test_topic_links_mixin(self):
+        mixin = TopicLinksMixin()
+        mixin.get_topic = self.get_object
+        topic_detail_link = mixin.topic_detail(self.topic)
+
+        self.assertEqual(
+            topic_detail_link, '<a href="/admin/garden/topic/1/change/">Test topic</a>')
+
+    def get_object(self, obj):
         return obj
 
     def tearDown(self):

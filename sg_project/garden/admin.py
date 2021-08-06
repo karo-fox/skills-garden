@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 from .models import Field, Topic
 
 
-class GardenLinksMixin:
+class FieldLinksMixin:
 
     @admin.display(description='Topic List')
     def topic_list(self, obj):
@@ -16,9 +16,16 @@ class GardenLinksMixin:
         field = self.get_field(obj)
         return mark_safe(f'<a href="/admin/garden/field/{field.id}/change/">{field.name}</a>')
 
+class TopicLinksMixin:
+
+    @admin.display(description='Topic Detail')
+    def topic_detail(self, obj):
+        topic = self.get_topic(obj)
+        return mark_safe(f'<a href="/admin/garden/topic/{topic.id}/change/">{topic.name}</a>')
+
 
 @admin.register(Field)
-class FieldAdmin(GardenLinksMixin, admin.ModelAdmin):
+class FieldAdmin(FieldLinksMixin, admin.ModelAdmin):
     list_display = ('id', 'name', 'topic_list',
                     'last_reviewed', 'review_frequency')
     list_display_links = ('id', 'name')
@@ -29,7 +36,7 @@ class FieldAdmin(GardenLinksMixin, admin.ModelAdmin):
 
 
 @admin.register(Topic)
-class TopicAdmin(GardenLinksMixin, admin.ModelAdmin):
+class TopicAdmin(FieldLinksMixin, admin.ModelAdmin):
     list_display = ('id', 'name', 'field_detail', 'last_reviewed')
     list_filter = ('field',)
 

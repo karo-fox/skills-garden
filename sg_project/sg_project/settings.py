@@ -41,17 +41,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'drf_yasg',
 
     'client',
     'garden',
     'journal',
     'schedule',
     'sources',
-    'users',
+    # 'users',
 ]
 
 MIDDLEWARE = [
-    # 'corsheaders.middleware.CorsMiddleware',s
     'journal.middleware.JournalMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
@@ -140,11 +140,6 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-LOGIN_REDIRECT_URL = 'client:home'
-LOGIN_URL = 'users:login'
-LOGOUT_REDIRECT_URL = 'users:login'
 
 
 REST_FRAMEWORK = {

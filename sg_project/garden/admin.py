@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
+from users.admin import OwnerMixin
+
 from .models import Field, Topic
 
 
@@ -15,6 +17,7 @@ class FieldLinksMixin:
     def field_detail(self, obj):
         field = self.get_field(obj)
         return mark_safe(f'<a href="/admin/garden/field/{field.id}/change/">{field.name}</a>')
+
 
 class TopicLinksMixin:
 
@@ -36,9 +39,12 @@ class FieldAdmin(FieldLinksMixin, admin.ModelAdmin):
 
 
 @admin.register(Topic)
-class TopicAdmin(FieldLinksMixin, admin.ModelAdmin):
-    list_display = ('id', 'name', 'field_detail', 'last_reviewed')
+class TopicAdmin(OwnerMixin, FieldLinksMixin, admin.ModelAdmin):
+    list_display = ('id', 'name', 'field_detail', 'last_reviewed', 'owner')
     list_filter = ('field',)
 
     def get_field(self, obj):
         return obj.field
+
+    def get_owner(self, obj):
+        return obj.field.owner

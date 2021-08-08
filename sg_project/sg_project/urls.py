@@ -30,12 +30,12 @@ schema_view = get_schema_view(
         license=openapi.License(name=""),
     ),
     public=True,
-    permission_classes=(permissions.IsAuthenticated,),
+    permission_classes=(permissions.AllowAny,),
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('users/', include('users.urls', namespace="users")),
+    path('users/', include('users.urls', namespace="users")),
     path('garden/', include('garden.urls', namespace="garden")),
     path('sources/', include('sources.urls', namespace="sources")),
     path('schedule/', include('schedule.urls', namespace="schedule")),

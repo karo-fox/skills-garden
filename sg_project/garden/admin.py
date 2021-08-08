@@ -27,9 +27,9 @@ class TopicLinksMixin:
 @admin.register(Field)
 class FieldAdmin(FieldLinksMixin, admin.ModelAdmin):
     list_display = ('id', 'name', 'topic_list',
-                    'last_reviewed', 'review_frequency')
-    list_display_links = ('id', 'name')
-    list_filter = ('date_added',)
+                    'last_reviewed', 'review_frequency', 'owner')
+    list_display_links = ('id', 'name',)
+    list_filter = ('date_added', 'owner',)
 
     def get_field(self, obj):
         return obj

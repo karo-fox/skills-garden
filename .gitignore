@@ -1,14 +1,10 @@
 /.vscode
 /sg_env
 /TODO
-/requirements.txt
+# /requirements.txt
 
-/sg_project/**/__pycache__
-/sg_project/**/migrations
+# /sg_project/**/__pycache__
+# /sg_project/**/migrations
 
-/sg_project/db.sqlite3
-/sg_project/db.sqlite3-journal
-
-/sg_project/**/static/app/package.json
-/sg_project/**/static/app/package-lock.json
-/sg_project/**/static/app/node_modules
+# /sg_project/db.sqlite3
+# /sg_project/db.sqlite3-journal

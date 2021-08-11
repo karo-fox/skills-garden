@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load rest_framework %}
+
+{% block main-content %}
+<header class="container">
+  <p class="title">Hi</p>
+  <p class="subtitle">Welcome to the Skills-Garden</p>
+</header>
+{% include 'components/_content.html' with list="Fields" new="New Field" %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'scripts/main.js' %}"></script>
+<script>
+  let form = `{% csrf_token %}
+  {% for field in form %}
+  <div class="field">
+    <label class="label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+    <div class="control">
+      <input id="{{ field.id_for_label }}" name="{{ field.name }}" class="input" type="{{ field.widget_type }}" required="">
+    </div>
+    {% if field.help_text %}
+    <p class="help">{{ field.help_text }}</p>
+    {% endif %}
+  </div>
+  {% endfor %}`
+  tab(`garden/fields`, 'fields', form);
+</script>
+{% endblock %}

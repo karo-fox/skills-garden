@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main-content %}
+<header class="container">
+  <div class="level">
+    <div class="level-left">
+      <p class="title">{{ object.name }}</p>
+    </div>
+    <div class="level-right">
+      <div class="buttons">
+        <button id="edit" class="button is-link">Edit</button>
+        <button id="delete" class="button is-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+  <p class="subtitle">{{ object.description }}</p>
+</header>
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="box">
+      <p class="title">Edit</p>
+      <div class="block" id="editFormBlock">
+      </div>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+{% include 'components/_content.html' with list="Topics" new="New Topic" %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'scripts/main.js' %}"></script>
+<script>
+  let token = '{% csrf_token %}'
+  let form = `{% csrf_token %}
+  {% for field in create_form %}
+  <div class="field">
+    <label class="label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+    <div class="control">
+      <input id="{{ field.id_for_label }}" name="{{ field.name }}" class="input" type="{{ field.widget_type }}" required="">
+    </div>
+    {% if field.help_text %}
+    <p class="help">{{ field.help_text }}</p>
+    {% endif %}
+  </div>
+  {% endfor %}`
+  let editForm = `<form id="editForm" method="UPDATE">
+          {% csrf_token %}
+          {% for field in edit_form %}
+          <div class="field">
+            <label class="label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            <div class="control">
+              <input id="{{ field.id_for_label }}" name="{{ field.name }}" class="input" type="{{ field.widget_type }}" required="">
+            </div>
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text }}</p>
+            {% endif %}
+          </div>
+          {% endfor %}
+          <input type="submit" value="submit" class="button is-black">
+        </form>`;
+  let id = "{{ object.pk }}";
+  tab(`garden/${id}`, 'topics', form);
+  actionButtons(`garden/${id}`, ``, editForm);
+</script>
+{% endblock %}

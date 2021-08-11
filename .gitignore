@@ -3,8 +3,8 @@
 /TODO
 # /requirements.txt
 
-# /sg_project/**/__pycache__
-# /sg_project/**/migrations
+/sg_project/**/__pycache__
+/sg_project/**/migrations
 
 # /sg_project/db.sqlite3
 # /sg_project/db.sqlite3-journal

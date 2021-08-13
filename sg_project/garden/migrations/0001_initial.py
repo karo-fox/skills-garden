@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField()),
                 ('date_added', models.DateField(auto_now_add=True)),
                 ('last_reviewed', models.DateField()),
-                ('review_frequency', models.DurationField()),
+                ('review_frequency', models.IntegerField()),
                 ('category', models.TextField()),
             ],
         ),

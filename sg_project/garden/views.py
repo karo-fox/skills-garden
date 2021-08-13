@@ -10,11 +10,11 @@ class FieldViewSet(viewsets.ModelViewSet):
     serializer_class = FieldSerializer
 
     def get_queryset(self):
-        return Field.objects.filter(owner=self.request.user)
+        return Field.objects.filter(owner_id=self.request.user.pk)
 
 
 class TopicViewSet(RevisionMixin, viewsets.ModelViewSet):
     serializer_class = TopicSerializer
 
     def get_queryset(self):
-        return Topic.objects.filter(field=self.kwargs['field_pk'])
+        return Topic.objects.filter(field_id=self.kwargs['field_pk'])

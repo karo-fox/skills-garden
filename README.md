@@ -4,10 +4,20 @@ REST API for my personal project.
 ## Try it out live [here](https://skills-garden.herokuapp.com/)!
 
 It is proven that efficient learning requires repeating the material. I designed this app to help myself with studying. It features:
-- garden: the place when you can store topics, categorized in fields
-- sources: to each topic you can add text source or an url link
-- schedule: the app will keep track of what you've learned & plan revisions for your topics
-- journal: here you can write and describe your learning process. It also logs actions taken by the system
+
+### garden
+Here you can create **fields** which are simple categories, e.g. Maths, or Physics. To each field you can add **topics**, such as Geometry or Gravity.
+  
+### sources
+To each of your topics you can add **sources**, which can be either text notes or url links.
+
+### schedule
+This part takes care of your **reviews**, which are planned according to your fields settings.
+
+### journal
+Here you can keep track of your progress by adding **entries**. Some entries will also be added automatically, so you can see what aactions you have taken.
+    
+    
 
 ## Authorization
 To test the API you'll have to create an account (through `users/register/` endpoint) and then get your authentication token (through `users/token/`).

@@ -6,5 +6,6 @@
 /sg_project/**/__pycache__
 /sg_project/**/migrations
 
-# /sg_project/db.sqlite3
-# /sg_project/db.sqlite3-journal
+/sg_project/db.sqlite3
+/sg_project/db.sqlite3-journal
+/sg_project/sg_project/settings.py

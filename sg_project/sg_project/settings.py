@@ -25,9 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-xr*ka8b1#y&k40=gi%@1)r@l&$)%2spap+0r009t*vp1f-e^7k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['skills-garden.herokuapp.com']
+ALLOWED_HOSTS = ['*']
+
+SECURE_CONTENT_TYPE_NOSNIFF = False
 
 
 # Application definition
@@ -41,8 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
     'drf_yasg',
+    'corsheaders',
 
     'garden',
     'journal',
@@ -52,6 +55,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+
     'journal.middleware.JournalMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
@@ -66,6 +71,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'sg_project.urls'
+APPEND_SLASH = False
 
 TEMPLATES = [
     {
@@ -147,7 +153,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
 
@@ -160,7 +166,7 @@ PASSWORD_HASHERS = [
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
-        'api_key {Token [token]}': {
+        'api_key {Bearer [token]}': {
             'type': 'apiKey',
             'in': 'header',
             'name': 'Authorization'
@@ -168,5 +174,13 @@ SWAGGER_SETTINGS = {
     },
 }
 
-import django_heroku
-django_heroku.settings(locals())
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:4200',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:4200",
+]
+
+# import django_heroku
+# django_heroku.settings(locals())

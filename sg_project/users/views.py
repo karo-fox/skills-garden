@@ -1,11 +1,8 @@
-# from django.shortcuts import reverse
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
-from rest_framework.authtoken.models import Token
 
 from drf_yasg.utils import swagger_auto_schema
 
@@ -21,6 +18,4 @@ def register(request, *args, **kwargs):
     user = User.objects.create_user(
         username=serializer.data['username'], password=serializer.data['password'])
     user.save()
-    token = Token.objects.create(user=user)
-    token.save()
     return Response(serializer.data)

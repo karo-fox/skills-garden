@@ -1,7 +1,6 @@
 /.vscode
 /sg_env
 /TODO
-# /requirements.txt
 
 /sg_project/**/__pycache__
 /sg_project/**/migrations

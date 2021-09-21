@@ -21,9 +21,11 @@ Here you can keep track of your progress by adding **entries**. Some entries wil
 
 ## Authorization
 To test the API you'll have to create an account (through `users/register/` endpoint) and then get your authentication token (through `users/token/`).
-Then you can use the API, you just have to provide the token.
+Then you can use the API, you just have to provide the access token.
 
-In swagger, just click "Authorize" and type "Token " + your authentication token
+In swagger, just click "Authorize" and type "Bearer " + your access token (there's a space in between).
+
+To refresh the token, go to `users/token/refresh/` and provide refresh token. You will receive access token.
 
 ## Technologies used
 - Django

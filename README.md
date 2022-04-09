@@ -1,15 +1,13 @@
 # skills-garden
-REST API for my personal project.
-
 ## Try it out live [here](https://skills-garden.herokuapp.com/)!
 
 It is proven that efficient learning requires repeating the material. I designed this app to help myself with studying. It features:
 
 ### garden
-Here you can create **fields** which are simple categories, e.g. Maths, or Physics. To each field you can add **topics**, such as Geometry or Gravity.
+Here you can create **fields** which are simple categories, e.g. Maths, or Physics. You can add **topics**, such as Geometry or Gravity, to each field.
   
 ### sources
-To each of your topics you can add **sources**, which can be either text notes or url links.
+**Sources** can be added to each of your topics in the form of text notes or links.
 
 ### schedule
 This part takes care of your **reviews**, which are planned according to your fields settings.

@@ -1,5 +1,4 @@
 # skills-garden
-## Try it out live [here](https://skills-garden.herokuapp.com/)!
 
 It is proven that efficient learning requires repeating the material. I designed this app to help myself with studying. It features:
 
